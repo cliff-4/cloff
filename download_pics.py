@@ -10,14 +10,14 @@ import argparse
 class redditImageScraper:
     def __init__(self, sub, limit, order, nsfw=False):
         config = configparser.ConfigParser()
-        config.read('reddit_conf.ini')
+        config.read('./conf.ini')
         self.sub = sub
         self.limit = limit
         self.order = order
         self.nsfw = nsfw
         self.path = f'images/{self.sub}/'
-        self.reddit = praw.Reddit(client_id='75tn_LhFWhCl_Q',#config['REDDIT']['client_id'],
-                                  client_secret='MDB-XSb7e-FtV_ZimTxA3-oT2T3ruA',#config['REDDIT']['client_secret'],
+        self.reddit = praw.Reddit(client_id=config['REDDIT']['client_id'],
+                                  client_secret=config['REDDIT']['client_secret'],
                                   user_agent='Multithreaded Reddit Image Downloader v2.0 (by u/impshum)')
 
     def download(self, image):
