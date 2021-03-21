@@ -6,7 +6,7 @@ import os
 import datetime
 from configparser import ConfigParser
 
-info = ConfigParser.read('./conf.ini')
+info = ConfigParser().read('./conf.ini')
 my_ass = info.get('DISCORD', 'token')
 
 time_start = datetime.datetime.now()
