@@ -6,8 +6,9 @@ import os
 import datetime
 from configparser import ConfigParser
 
-info = ConfigParser().read('./conf.ini')
-my_ass = info.get('DISCORD', 'token')
+info = ConfigParser()
+info.read('./conf.ini')
+my_ass = info['DISCORD']['token']
 
 time_start = datetime.datetime.now()
 
@@ -28,7 +29,7 @@ async def uptime(ctx):
     uptime = str(datetime.datetime.now()-time_start).split(":")
     await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
-for filename in os.listdir("/windowshare/shubbu's stuff/do not disturb/EXTRA_DND/cogs/"):
+for filename in os.listdir("./cogs/"):
     if filename.endswith('.py'):
         cloff.load_extension(f"cogs.{filename[0:-3]}")
 
