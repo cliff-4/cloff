@@ -2,8 +2,10 @@ import discord
 from discord.ext import commands
 import os
 import datetime
+from configparser import ConfigParser
 
-my_ass = 'ODIxMDk3OTE2MTk3MzcyMDA0.YE-xBg.Y_dCag6rtq5YcNj8DDrG5n7wQTU'
+info = ConfigParser.read('./conf.ini')
+my_ass = info.get('DISCORD', 'token')
 
 time_start = datetime.datetime.now()
 
