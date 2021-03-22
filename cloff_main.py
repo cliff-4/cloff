@@ -46,6 +46,7 @@ async def uptime(ctx):
 
 @cloff.command()
 async def on_message(ctx):
+    await ctx.send(ctx.message.author)
     if 'good girl' in ctx.message.content:
         await ctx.send(f"uwu thanks")
 
