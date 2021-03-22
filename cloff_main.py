@@ -42,10 +42,10 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
 @cloff.event
 async def on_message(message):
     if message.author == cloff.user:
-        return
+        k = False
     else:
         k = False
-        for term in ['boy', 'girl', 'boi', 'gorl', 'slave']:
+        for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
             if (f"good {term}" in message.content):
                 k = True
         if k:
