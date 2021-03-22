@@ -132,7 +132,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
     async def spam(self, ctx, argument='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
         try:
             if argument == 'vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
-                ctx.send('Okay, but spam WHAT')
+                await ctx.send('Okay, but spam WHAT')
             else:
                 for i in range(10):
                     await ctx.send(argument)

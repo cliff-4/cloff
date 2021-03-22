@@ -6,7 +6,6 @@ import os
 import datetime
 from configparser import ConfigParser
 
-print('\n###########################################')
 info = ConfigParser()
 info.read('./cloff/conf.ini')
 my_ass = info['DISCORD']['token']
@@ -15,6 +14,10 @@ time_start = datetime.datetime.now()
 
 cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
+
+@cloff.command()
+async def on_ready():
+    print('\n###########################################')
 
 @cloff.command(aliases=['l'])
 async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
