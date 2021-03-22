@@ -6,6 +6,7 @@ import os
 import datetime
 from configparser import ConfigParser
 
+print('\n###########################################')
 info = ConfigParser()
 info.read('./cloff/conf.ini')
 my_ass = info['DISCORD']['token']
