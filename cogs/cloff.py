@@ -140,12 +140,6 @@ You have the right to remain silent because whatever you say will be stupid anyw
         except Exception as e:
             await ctx.send(e)
 
-    @commands.command()
-    async def on_message(message):
-        print(f"{message.content}")
-        if ('good girl' in message.content) or ('good boy' in message.content):
-            await message.channel.send(f"uwu thanks {message.author.name[:-5]}")
-
 
 def setup(cloff):
     cloff.add_cog(cloff_the_bot(cloff))
