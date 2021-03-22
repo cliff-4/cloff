@@ -3,7 +3,7 @@ from discord.ext import tasks, commands
 
 class task_uwu(commands.Cog):
 
-    def __init__(self):
+    def __init__(self, cloff):
         self.index = 0
         self.printer.start()
 
