@@ -7,7 +7,7 @@ import datetime
 from configparser import ConfigParser
 
 info = ConfigParser()
-info.read('./conf.ini')
+info.read('./cloff/conf.ini')
 my_ass = info['DISCORD']['token']
 
 time_start = datetime.datetime.now()
@@ -28,21 +28,21 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
                         cloff.load_extension(f'cogs.{ext}')
                         await ctx.send(f"{ext} reloaded")                    
             except Exception as e:
-                print(e)
+                await ctx.send(e)
         else:
             try:
                 cloff.unload_extension(f'cogs.{extention}')
                 cloff.load_extension(f'cogs.{extention}')
                 await ctx.send(f"{extention} reloaded")
             except Exception as e:
-                print(e)
+                await ctx.send(e)
 
 @cloff.command()
 async def uptime(ctx):
     uptime = str(datetime.datetime.now()-time_start).split(":")
     await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
-for filename in os.listdir("./cogs/"):
+for filename in os.listdir("./cloff/cogs/"):
     if filename.endswith('.py'):
         cloff.load_extension(f"cogs.{filename[0:-3]}")
 
