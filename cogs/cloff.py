@@ -129,10 +129,12 @@ You have the right to remain silent because whatever you say will be stupid anyw
         await ctx.send(split_list[random.randint(0, len(split_list)-1)])
 
     @commands.command()
-    async def spam(self, ctx, argument="Okay, but spam WHAT"):
-        for i in range(10):
-            await ctx.send(argument)
-            time.sleep(1)
-
+    async def spam(self, ctx, argument):
+        try:
+            for i in range(10):
+                await ctx.send(argument)
+                time.sleep(1)
+        except Error as e:
+            await ctx.send(e)
 def setup(cloff):
     cloff.add_cog(cloff_the_bot(cloff))
