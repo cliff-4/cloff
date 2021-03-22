@@ -45,7 +45,7 @@ async def on_message(message):
         return
     else:
         if ('good girl' in message.content) or ('good boy' in message.content):
-            await message.channel.send(f"uwu thanks {message.author}")
+            await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
 
 @cloff.command()
 async def uptime(ctx):
