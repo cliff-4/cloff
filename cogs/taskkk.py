@@ -1,5 +1,5 @@
 import discord
-from discord.ext import tasks
+from discord.ext import tasks, commands
 
 class task_uwu(commands.Cog):
 
