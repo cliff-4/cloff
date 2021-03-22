@@ -1,7 +1,7 @@
 import os
 import re
 import requests
-import praw
+import asyncpraw
 import configparser
 import concurrent.futures
 import argparse
@@ -20,7 +20,7 @@ class redditImageScraper(commands.Cog):
         self.order = order
         self.nsfw = nsfw
         self.path = f'images/{self.sub}/'
-        self.reddit = praw.Reddit(client_id=config['REDDIT']['client_id'],
+        self.reddit = asyncpraw.Reddit(client_id=config['REDDIT']['client_id'],
                                   client_secret=config['REDDIT']['client_secret'],
                                   user_agent='Multithreaded Reddit Image Downloader v2.0 (by u/impshum)')
 
