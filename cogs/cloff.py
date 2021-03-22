@@ -142,6 +142,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
 
     @commands.command()
     async def on_message(message):
+        print(f"{message.content}\nfrom {message.channel.name}")
         if 'good girl' in message.content:
             await message.channel.send(f"uwu thanks {message.author.name[:-5]}")
 
