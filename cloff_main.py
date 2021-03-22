@@ -39,7 +39,7 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
             except Exception as e:
                 await ctx.send(e)
 
-@cloff.event
+@cloff.event()
 async def on_message(message):
     if message.author == cloff.user:
         k = False
