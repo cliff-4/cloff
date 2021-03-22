@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 import os
 import random
-import datetime 
+import datetime
+import time
 
 class cloff_the_bot(commands.Cog):
 
@@ -127,6 +128,11 @@ You have the right to remain silent because whatever you say will be stupid anyw
         split_list = list.split("\n")
         await ctx.send(split_list[random.randint(0, len(split_list)-1)])
 
+    @commands.command()
+    async def spam(self, ctx, argument="Okay, but spam WHAT"):
+        for i in range(10):
+            await ctx.send(argument)
+            time.sleep(1)
 
 def setup(cloff):
     cloff.add_cog(cloff_the_bot(cloff))
