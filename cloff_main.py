@@ -15,9 +15,7 @@ time_start = datetime.datetime.now()
 cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
 
-@cloff.command()
-async def on_ready():
-    print('\n###########################################')
+print('\n###########################################')
 
 @cloff.command(aliases=['l'])
 async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
