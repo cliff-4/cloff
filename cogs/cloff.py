@@ -139,7 +139,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
                     time.sleep(1)
         except Exception as e:
             await ctx.send(e)
-
+"""
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author == cloff.user:
@@ -150,7 +150,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
                 if (f"good {term}" in message.content):
                     k = True
             if k:
-                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
+                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")"""
 
 class task_uwu(commands.Cog):
 
