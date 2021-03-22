@@ -44,12 +44,6 @@ async def uptime(ctx):
     uptime = str(datetime.datetime.now()-time_start).split(":")
     await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
-@cloff.command()
-async def on_message(ctx):
-    print(ctx.message.author.name)
-    if 'good girl' in ctx.message.content:
-        await ctx.send(f"uwu thanks")
-
 for filename in os.listdir("./cloff/cogs/"):
     if filename.endswith('.py'):
         cloff.load_extension(f"cogs.{filename[0:-3]}")
