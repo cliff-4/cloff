@@ -141,10 +141,9 @@ You have the right to remain silent because whatever you say will be stupid anyw
             await ctx.send(e)
 
     @commands.command()
-    async def on_message(ctx):
-        print(ctx.message.author.name)
-        if 'good girl' in ctx.message.content:
-            await ctx.send(f"uwu thanks")
+    async def on_message(message):
+        if 'good girl' in message.content:
+            await message.channel.send(f"uwu thanks {message.author.name[:-5]}")
 
 
 def setup(cloff):
