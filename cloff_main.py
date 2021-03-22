@@ -28,7 +28,7 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
                         cloff.load_extension(f'cogs.{ext}')
                         await ctx.send(f"{ext} reloaded")                    
             except Exception as e:
-                print(e)
+                await ctx.send(e)
         else:
             try:
                 cloff.unload_extension(f'cogs.{extention}')
