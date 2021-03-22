@@ -41,9 +41,11 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
 
 @cloff.event
 async def on_message(message):
-    print(f"{message.content}")
-    if ('good girl' in message.content) or ('good boy' in message.content):
-        await message.channel.send(f"uwu thanks {message.author.name[:-5]}")
+    if message.author == cloff.user:
+        return
+    else:
+        if ('good girl' in message.content) or ('good boy' in message.content):
+            await message.channel.send(f"uwu thanks {message.author[:-5]}")
 
 @cloff.command()
 async def uptime(ctx):
