@@ -35,7 +35,7 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
                 cloff.load_extension(f'cogs.{extention}')
                 await ctx.send(f"{extention} reloaded")
             except Exception as e:
-                print(e)
+                await ctx.send(e)
 
 @cloff.command()
 async def uptime(ctx):
