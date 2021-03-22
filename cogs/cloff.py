@@ -140,10 +140,10 @@ You have the right to remain silent because whatever you say will be stupid anyw
         except Exception as e:
             await ctx.send(e)
 
-    @commands.event
-    async def on_message(message):
+    @commands.Cog.listener()
+    async def on_message(self, message):
         if message.author == cloff.user:
-            k = False
+            return
         else:
             k = False
             for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
