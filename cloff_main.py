@@ -16,13 +16,26 @@ cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
 
 @cloff.command(aliases=['l'])
-async def reload(ctx, extention='cloff'):
-    if ctx.message.author.id == 700376271355379823:
-        cloff.unload_extension(f'cogs.{extention}')
-        cloff.load_extension(f'cogs.{extention}')
-        await ctx.send("Commands reloaded")
-    else:
+async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
+    if ctx.message.author.id != 700376271355379823:
         await ctx.send("You do not have permission to run this command :pig_nose:")
+    else:
+        if extention=='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
+            try:
+                for ext in ['cloff', 'reddit_image']:
+                    if ctx.message.author.id == 700376271355379823:
+                        cloff.unload_extension(f'cogs.{ext}')
+                        cloff.load_extension(f'cogs.{ext}')
+                        await ctx.send(f"{ext} reloaded")                    
+            except Exception as e:
+                print(e)
+        else:
+            try:
+                cloff.unload_extension(f'cogs.{extention}')
+                cloff.load_extension(f'cogs.{extention}')
+                await ctx.send(f"{extention} reloaded")
+            except Exception as e:
+                print(e)
 
 @cloff.command()
 async def uptime(ctx):

@@ -5,10 +5,14 @@ import praw
 import configparser
 import concurrent.futures
 import argparse
+import discord
+from discord.ext import commands
+#import random
+#import datetime
 
-
-class redditImageScraper:
+class redditImageScraper(commands.Cog):
     def __init__(self, sub, limit, order, nsfw=False):
+        
         config = configparser.ConfigParser()
         config.read('./conf.ini')
         self.sub = sub
@@ -20,11 +24,13 @@ class redditImageScraper:
                                   client_secret=config['REDDIT']['client_secret'],
                                   user_agent='Multithreaded Reddit Image Downloader v2.0 (by u/impshum)')
 
+
     def download(self, image):
         r = requests.get(image['url'])
-        print(image['url'])
         with open(image['fname'], 'wb') as f:
             f.write(r.content)
+        print(r)
+        return str(image['url'])
 
     def start(self):
         images = []
@@ -53,18 +59,23 @@ class redditImageScraper:
                     ptolemy.map(self.download, images)
         except Exception as e:
             print(e)
+        return self.download
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Multithreaded Reddit Image Downloader v2.0 (by u/impshum)')
-    required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('-s', type=str, help="subreddit", required=True)
-    required_args.add_argument('-i', type=int, help="number of images", required=True)
-    required_args.add_argument('-o', type=str, help="order (new/top/hot)", required=True)
-    args = parser.parse_args()
-    scraper = redditImageScraper(args.s, args.i, args.o)
-    scraper.start()
+class cloff_reddit_image_sender(commands.Cog):
+
+    def __init__(self, cloff):
+        self.client = cloff
+    
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('reddit image downloader package ready')
+
+    @commands.command()
+    async def reddit(self, ctx, sub):
+        await ctx.send(redditImageScraper(sub, 1, 'hot').start())
 
 
-if __name__ == '__main__':
-    main()
+
+def setup(cloff):
+    cloff.add_cog(cloff_reddit_image_sender(cloff))
