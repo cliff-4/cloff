@@ -82,8 +82,8 @@ class cloff_the_bot(commands.Cog):
         await ctx.send(f'{list[random.randint(0, len(list)-1)]} {name}')
         print(ctx.message.author.id)
 
-    @commands.command()
-    async def echo(self, ctx, argument="What do you want to echo, idiot."):
+    @commands.command(aliases=['say'])
+    async def echo(self, ctx, argument="What do you want me to say, idiot."):
         await ctx.send(argument)
 
     @commands.command(aliases=["roast"])
