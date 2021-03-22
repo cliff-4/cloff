@@ -142,15 +142,15 @@ You have the right to remain silent because whatever you say will be stupid anyw
 
     @commands.Cog.listener()
     async def on_message(message):
-    if message.author == cloff.user:
-        k = False
-    else:
-        k = False
-        for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
-            if (f"good {term}" in message.content):
-                k = True
-        if k:
-            await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
+        if message.author == cloff.user:
+            k = False
+        else:
+            k = False
+            for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
+                if (f"good {term}" in message.content):
+                    k = True
+            if k:
+                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
 
 
 def setup(cloff):
