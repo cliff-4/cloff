@@ -140,7 +140,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
         except Exception as e:
             await ctx.send(e)
 
-    @commands.event
+    @commands.Cog.listener()
     async def on_message(message):
     if message.author == cloff.user:
         k = False
