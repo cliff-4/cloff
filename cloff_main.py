@@ -44,7 +44,11 @@ async def on_message(message):
     if message.author == cloff.user:
         return
     else:
-        if ('good girl' in message.content) or ('good boy' in message.content):
+        k = False
+        for term in ['boy', 'girl', 'boi', 'gorl', 'slave']:
+            if (f"good {term}" in message.content):
+                k = True
+        if k:
             await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
 
 @cloff.command()
