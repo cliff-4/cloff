@@ -45,9 +45,9 @@ async def uptime(ctx):
     await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 @cloff.command()
-async def on_event(ctx):
+async def on_message(ctx):
     if 'good girl' in ctx.message.content:
-        await ctx.send("uwu thanks")
+        await ctx.send(f"uwu thanks")
 
 for filename in os.listdir("./cloff/cogs/"):
     if filename.endswith('.py'):
