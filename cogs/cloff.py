@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 import os
 import random
 import datetime
@@ -148,20 +148,6 @@ You have the right to remain silent because whatever you say will be stupid anyw
             if k:
                 await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")"""
 
-class task_uwu(commands.Cog):
-
-    def __init__(self):
-        self.index = 0
-        self.printer.start()
-
-    def cog_unload(self):
-        self.printer.cancel()
-    
-    @tasks.loop(seconds=2)
-    async def printer(self):
-        print(self.index)
-        self.index += 1
 
 def setup(cloff):
     cloff.add_cog(cloff_the_bot(cloff))
-    cloff.add_cog(task_uwu(cloff))
