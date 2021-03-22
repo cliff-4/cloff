@@ -39,17 +39,6 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
             except Exception as e:
                 await ctx.send(e)
 
-@cloff.event()
-async def on_message(message):
-    if message.author == cloff.user:
-        k = False
-    else:
-        k = False
-        for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
-            if (f"good {term}" in message.content):
-                k = True
-        if k:
-            await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
 
 @cloff.command()
 async def uptime(ctx):
