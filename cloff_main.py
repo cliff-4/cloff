@@ -7,7 +7,7 @@ import datetime
 from configparser import ConfigParser
 
 info = ConfigParser()
-info.read('./conf.ini')
+info.read('./cloff/conf.ini')
 my_ass = info['DISCORD']['token']
 
 time_start = datetime.datetime.now()
