@@ -51,6 +51,6 @@ async def uptime(ctx):
     await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 for filename in cog_list:
-    cloff.load_extension(f"cogs.{filename[0:-3]}")
+    cloff.load_extension(f"cogs.{filename}")
 
 cloff.run(my_ass)
