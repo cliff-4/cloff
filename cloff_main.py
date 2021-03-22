@@ -15,6 +15,11 @@ time_start = datetime.datetime.now()
 cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
 
+cog_list = []
+for cog in os.listdir("./cloff/cogs"):
+    if cog.endswith(".py"):
+        cog_list.append(cog[:-3])
+
 print('\n###########################################')
 
 @cloff.command(aliases=['l'])
@@ -24,7 +29,7 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
     else:
         if extention=='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
             try:
-                for ext in ['cloff', 'reddit_image']:
+                for ext in cog_list:
                     if ctx.message.author.id == 700376271355379823:
                         cloff.unload_extension(f'cogs.{ext}')
                         cloff.load_extension(f'cogs.{ext}')
@@ -45,8 +50,7 @@ async def uptime(ctx):
     uptime = str(datetime.datetime.now()-time_start).split(":")
     await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
-for filename in os.listdir("./cloff/cogs/"):
-    if filename.endswith('.py'):
-        cloff.load_extension(f"cogs.{filename[0:-3]}")
+for filename in cog_list:
+    cloff.load_extension(f"cogs.{filename[0:-3]}")
 
 cloff.run(my_ass)

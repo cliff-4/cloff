@@ -7,16 +7,12 @@ import time
 
 class cloff_the_bot(commands.Cog):
 
-    def __init__(self):
+    def __init__(self, cloff):
         self.client = cloff
     
     @commands.Cog.listener()
     async def on_ready(self):
         print('bitch im ready')
-
-    @commands.command()
-    async def on_member_join(self, member):
-        print(f"{member} has joined a server")
 
     @commands.command(aliases=['p'])
     async def ping(self, ctx):
