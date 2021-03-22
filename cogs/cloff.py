@@ -7,7 +7,7 @@ import time
 
 class cloff_the_bot(commands.Cog):
 
-    def __init__(self, cloff):
+    def __init__(self):
         self.client = cloff
     
     @commands.Cog.listener()
