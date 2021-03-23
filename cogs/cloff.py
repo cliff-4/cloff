@@ -20,7 +20,7 @@ class cloff_the_bot(commands.Cog):
         if 1<=k<=80:
             await ctx.send("Fuck you.")
         elif 80<k<=99:
-            await ctx.send(f'{round(cloff.latency*1000)}ms')
+            await ctx.send(f'{round(self.client.latency*1000)}ms')
         elif k == 100:
             await ctx.send("Pong!")
         
