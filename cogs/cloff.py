@@ -84,8 +84,8 @@ class cloff_the_bot(commands.Cog):
         print(ctx.message.author.id)
 
     @commands.command(aliases=['say'])
-    async def echo(self, ctx, *args):
-        await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
+    async def echo(self, ctx, arg):
+        await ctx.send(arg)
 
     @commands.command(aliases=["roast"])
     async def bully(self, ctx, argument="who do you want to bully, shithead"):
