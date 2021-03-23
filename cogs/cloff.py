@@ -84,8 +84,8 @@ class cloff_the_bot(commands.Cog):
         print(ctx.message.author.id)
 
     @commands.command(aliases=['say'])
-    async def echo(self, ctx, argument="What do you want me to say, idiot."):
-        await ctx.send(argument)
+    async def echo(self, ctx, *args):
+        await ctx.send('{} arguments: {}'.format(len(args), ' '.join(args)))
 
     @commands.command(aliases=["roast"])
     async def bully(self, ctx, argument="who do you want to bully, shithead"):
@@ -153,6 +153,10 @@ You have the right to remain silent because whatever you say will be stupid anyw
             if k:
                 await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")"""
 
+    @commands.command()
+    async def quote(self, ctx):
+        k = None
+        
 
 def setup(cloff):
     cloff.add_cog(cloff_the_bot(cloff))
