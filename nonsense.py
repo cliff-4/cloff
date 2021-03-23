@@ -9,7 +9,7 @@ priority = 'hot'
 ###############################################
 
 config = ConfigParser()
-config.read('./conf.ini')
+config.read(path_to_file + '/conf.ini')
 client_id = config['REDDIT']['client_id']
 client_secret = config['REDDIT']['client_secret']
 

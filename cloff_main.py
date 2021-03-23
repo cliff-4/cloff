@@ -5,9 +5,11 @@ from discord.ext import commands
 import os
 import datetime
 from configparser import ConfigParser
+import builtins
 
+__builtins__.path_to_file = str(os.path.dirname(os.path.abspath(__file__)))
 info = ConfigParser()
-info.read('./cloff/conf.ini')
+info.read(path_to_file + '/conf.ini')
 my_ass = info['DISCORD']['token']
 
 time_start = datetime.datetime.now()
@@ -16,7 +18,7 @@ cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
 
 cog_list = []
-for cog in os.listdir("./cloff/cogs"):
+for cog in os.listdir(path_to_file + "/cogs"):
     if cog.endswith(".py"):
         cog_list.append(cog[:-3])
 

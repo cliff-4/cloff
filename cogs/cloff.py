@@ -26,7 +26,7 @@ class cloff_the_bot(commands.Cog):
         
     @commands.command()
     async def cursed(self, ctx):
-        dir = "./images/cursedcomments"
+        dir = path_to_file + "/images/cursedcomments"
         await ctx.send(file=discord.File(f"{dir}/{os.listdir(dir)[random.randint(0,len(os.listdir(dir))-1)]}"))
 
     @commands.command()
