@@ -33,7 +33,7 @@ async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu')
                     if ctx.message.author.id == 700376271355379823:
                         cloff.unload_extension(f'cogs.{ext}')
                         cloff.load_extension(f'cogs.{ext}')
-                        await ctx.send(f"{ext} reloaded")                    
+                        await ctx.send(f"reloaded {ext}")                    
             except Exception as e:
                 await ctx.send(e)
         else:

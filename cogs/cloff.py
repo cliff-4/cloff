@@ -84,7 +84,7 @@ class cloff_the_bot(commands.Cog):
         print(ctx.message.author.id)
 
     @commands.command(aliases=['say'])
-    async def echo(self, ctx, arg):
+    async def echo(self, ctx, *, arg):
         await ctx.send(arg)
 
     @commands.command(aliases=["roast"])
@@ -140,23 +140,24 @@ You have the right to remain silent because whatever you say will be stupid anyw
                     time.sleep(1)
         except Exception as e:
             await ctx.send(e)
-"""
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        if message.author == cloff.user:
-            return
-        else:
-            k = False
-            for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
-                if (f"good {term}" in message.content):
-                    k = True
-            if k:
-                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")"""
+
+#    @commands.Cog.listener()
+#    async def on_message(self, message):
+#        if message.author == cloff.user:
+#            return
+#        else:
+#            k = False
+#            for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
+#                if (f"good {term}" in message.content):
+#                    k = True
+#            if k:
+#                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
 
     @commands.command()
     async def quote(self, ctx):
         k = None
-        
+
+
 
 def setup(cloff):
     cloff.add_cog(cloff_the_bot(cloff))
