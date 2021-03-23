@@ -14,7 +14,7 @@ class redditImageScraper(commands.Cog):
     def __init__(self, sub, limit, order, nsfw=False):
         
         config = configparser.ConfigParser()
-        config.read('./cloff/conf.ini')
+        config.read(path_to_file + '/conf.ini')
         self.sub = sub
         self.limit = limit
         self.order = order
@@ -29,8 +29,6 @@ class redditImageScraper(commands.Cog):
         r = requests.get(image['url'])
         with open(image['fname'], 'wb') as f:
             f.write(r.content)
-        print(r)
-        return str(image['url'])
 
     def start(self):
         images = []
@@ -59,7 +57,6 @@ class redditImageScraper(commands.Cog):
                     ptolemy.map(self.download, images)
         except Exception as e:
             print(e)
-        return self.download
 
 
 class cloff_reddit_image_sender(commands.Cog):
