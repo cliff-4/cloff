@@ -16,8 +16,15 @@ class cloff_the_bot(commands.Cog):
 
     @commands.command(aliases=['p'])
     async def ping(self, ctx):
-        await ctx.send("Fuck you.")
-        #await ctx.send(f'{round(cloff.latency*1000)}ms')
+        k = random.randint(1,100)
+        if 1<=k<=80:
+            await ctx.send("Fuck you.")
+        elif 80<k<99:
+            await ctx.send(f'{round(cloff.latency*1000)}ms')
+        elif k == 99:
+            await ctx.send("Pong!")
+        else:
+            await ctx.send("The fuck")
 
     @commands.command()
     async def cursed(self, ctx):

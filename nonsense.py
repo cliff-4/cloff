@@ -1,6 +1,7 @@
 import asyncpraw
 from configparser import ConfigParser
 
+print("")
 ###############################################
 sub = 'cursedcomments'
 priority = 'hot'
@@ -18,7 +19,6 @@ reddit = asyncpraw.Reddit(
     user_agent="my user agent",
 )
 
-@client.command()
 async def k(self, ctx):
     subreddit = await reddit.subreddit("learnpython")
     async for submission in subreddit.hot(limit=10):
