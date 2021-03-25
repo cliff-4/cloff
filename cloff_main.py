@@ -7,11 +7,15 @@ import datetime
 from configparser import ConfigParser
 import builtins
 
+#set path_to_file as a variable to be used across modules
 __builtins__.path_to_file = str(os.path.dirname(os.path.abspath(__file__)))
+
+#to get discord token from conf.ini
 info = ConfigParser()
 info.read(path_to_file + '/conf.ini')
 my_ass = info['DISCORD']['token']
 
+#time recorded at the start of bot to get ;uptime
 time_start = datetime.datetime.now()
 
 cloff = commands.Bot(command_prefix=";")
@@ -24,7 +28,7 @@ for cog in os.listdir(path_to_file + "/cogs"):
 
 print('\n###########################################')
 
-@cloff.command(aliases=['l'])
+@cloff.command()
 async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
     if ctx.message.author.id != 700376271355379823:
         await ctx.send("You do not have permission to run this command :pig_nose:")

@@ -133,8 +133,8 @@ You have the right to remain silent because whatever you say will be stupid anyw
         await ctx.send(split_list[random.randint(0, len(split_list)-1)])
 
     @commands.command()
-    async def spam(self, ctx, argument='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu', times=10):
-        if times >= 20:
+    async def spam(self, ctx, argument='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu', times=5):
+        if times >= 10:
             try:
                 await ctx.send("Ew no not gonna spam that many")
             except Exception as e:
