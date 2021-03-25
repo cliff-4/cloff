@@ -31,8 +31,11 @@ class cloff_the_bot(commands.Cog):
 
     @commands.command()
     async def purge(self, ctx, n=1):
-        #await ctx.send(ctx.log_froms(ctx.get_channel(discord.utils.get(ctx.guild.channels, name=given_name).id), 100))
-        await ctx.channel.purge(limit=n+1)
+        if n>=100:
+            await ctx.send("Fuck no")
+        else:    
+            #await ctx.send(ctx.log_froms(ctx.get_channel(discord.utils.get(ctx.guild.channels, name=given_name).id), 100))
+            await ctx.channel.purge(limit=n+1)
 
 
     @commands.command()
@@ -129,17 +132,20 @@ You have the right to remain silent because whatever you say will be stupid anyw
         split_list = list.split("\n")
         await ctx.send(split_list[random.randint(0, len(split_list)-1)])
 
-#    @commands.command()
-#    async def spam(self, ctx, argument='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu', times=10):
-#        try:
-#            if argument == 'vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
-#                await ctx.send('Okay, but spam WHAT')
-#            else:
-#                for i in range(times):
-#                    await ctx.send(argument)
-#                    time.sleep(1)
-#        except Exception as e:
-#            await ctx.send(e)
+    @commands.command()
+    async def spam(self, ctx, argument='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu', times=10):
+        if i >= 20:
+            await ctx.send("Ew no not gonna spam that many")
+        else:
+            try:
+                if argument == 'vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
+                    await ctx.send('Okay, but spam WHAT')
+                else:
+                    for i in range(times):
+                        await ctx.send(argument)
+                        time.sleep(0.5)
+            except Exception as e:
+                await ctx.send(e)
 
 #    @commands.Cog.listener()
 #    async def on_message(self, message):
