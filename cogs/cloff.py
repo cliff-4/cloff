@@ -134,7 +134,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
 
     @commands.command()
     async def spam(self, ctx, argument='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu', times=5):
-        if times >= 10:
+        if times > 10:
             try:
                 await ctx.send("Ew no not gonna spam that many")
             except Exception as e:
