@@ -29,7 +29,7 @@ class cloff_the_bot(commands.Cog):
         dir = path_to_file + "/images/cursedcomments"
         await ctx.send(file=discord.File(f"{dir}/{os.listdir(dir)[random.randint(0,len(os.listdir(dir))-1)]}"))
 
-    @commands.command()
+    @commands.command(aliases=["yeet", "yeetus", "dismiss", "remove", "rm", "clear"])
     async def purge(self, ctx, n=1):
         if n>=100:
             await ctx.send("Fuck no")
