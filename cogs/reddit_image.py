@@ -30,11 +30,10 @@ class reddit_images(commands.Cog):
 		
 
 	@commands.command(aliases=["reddit", "Reddit", "R"])
-	async def r(self, ctx, sub="pics"):
+	async def r(self, ctx, sub="dankmemes"):
 		try:
-			submissions = self.reddit.subreddit(sub).hot()
 			for i in range(0, random.randint(1, 100)):
-				submission = next(x for x in submissions if not x.stickied)
+				submission = next(x for x in self.reddit.subreddit(sub).hot() if not x.stickied)
 			await ctx.send(f'"{submission.title}"\n{submission.url}')
 		except Exception as e:
 			await ctx.send(e)

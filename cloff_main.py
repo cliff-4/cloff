@@ -26,7 +26,7 @@ for cog in os.listdir(path_to_file + "/cogs"):
 	if cog.endswith(".py"):
 		cog_list.append(cog[:-3])
 
-print('\n###########################################')
+print('\n'+43*'#')
 
 @cloff.command()
 async def reload(ctx, extention=''):
