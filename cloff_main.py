@@ -52,6 +52,47 @@ async def reload(ctx, extention=''):
 			except Exception as e:
 				await ctx.send(e)
 
+@cloff.command()
+async def load(ctx, extention=''):
+	if ctx.message.author.id != 700376271355379823:
+		await ctx.send("You do not have permission to run this command :pig_nose:")
+	else:
+		if not extention:
+			for ext in cog_list:
+				try:
+					cloff.load_extension(f'cogs.{ext}')
+					await ctx.send(f"loaded {ext}")                    
+				except Exception as e:
+					await ctx.send(e)
+			print("cogs loaded")
+		else:
+			try:
+				cloff.load_extension(f'cogs.{extention}')
+				await ctx.send(f"{extention} loaded")
+				print(extention, "loaded")
+			except Exception as e:
+				await ctx.send(e)
+
+@cloff.command()
+async def unload(ctx, extention=''):
+	if ctx.message.author.id != 700376271355379823:
+		await ctx.send("You do not have permission to run this command :pig_nose:")
+	else:
+		if not extention:
+			for ext in cog_list:
+				try:
+					cloff.unload_extension(f'cogs.{ext}')
+					await ctx.send(f"reloaded {ext}")                    
+				except Exception as e:
+					await ctx.send(e)
+			print("cogs unloaded")
+		else:
+			try:
+				cloff.unload_extension(f'cogs.{extention}')
+				await ctx.send(f"{extention} unloaded")
+				print(extention, "unloaded")
+			except Exception as e:
+				await ctx.send(e)
 
 @cloff.command()
 async def uptime(ctx):

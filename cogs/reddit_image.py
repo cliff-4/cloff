@@ -21,7 +21,8 @@ class reddit_images(commands.Cog):
 		self.reddit = praw.Reddit(
 				client_id = info["REDDIT"]["client_id"],
 				client_secret = info["REDDIT"]["client_secret"],
-				user_agent="A very kawaii discord bot"
+				user_agent="A very kawaii discord bot",
+				check_for_async = False
 			)
 
 	@commands.Cog.listener()
@@ -32,9 +33,17 @@ class reddit_images(commands.Cog):
 	@commands.command(aliases=["reddit", "Reddit", "R"])
 	async def r(self, ctx, sub="dankmemes"):
 		try:
-			for i in range(0, random.randint(1, 10)):
-				submission = next(x for x in self.reddit.subreddit(sub).hot() if not x.stickied)
-			await ctx.send(f'"{submission.title}"\n{submission.url}')
+			k = self.reddit.subreddit(sub)
+			if not k.over18:
+				submissions = k.hot()
+				for i in range(0, random.randint(1, 10)):
+					submission = next(x for x in submissions if not x.stickied)
+				await ctx.send(f'"{submission.title}"\n{submission.url}')
+			else:
+				submissions = k.hot()
+				for i in range(0, random.randint(1, 10)):
+					submission = next(x for x in submissions if not x.stickied)
+				await ctx.send(f'**[NSFW]**\n"{submission.title}"\n_(Requested by <@!{ctx.message.author.id}>)_\n{submission.url}')
 		except Exception as e:
 			await ctx.send(e)
 

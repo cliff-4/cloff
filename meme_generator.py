@@ -17,6 +17,6 @@ cv.imshow("Processed", img2)
 
 k = cv.waitKey(2000)
 if k == ord('q'):
-    cv.destroyAllWindows()
+	cv.destroyAllWindows()
 
 print(image.shape)
