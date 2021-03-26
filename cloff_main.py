@@ -29,24 +29,26 @@ for cog in os.listdir(path_to_file + "/cogs"):
 print('\n###########################################')
 
 @cloff.command()
-async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
+async def reload(ctx, extention=''):
 	if ctx.message.author.id != 700376271355379823:
 		await ctx.send("You do not have permission to run this command :pig_nose:")
 	else:
-		if extention=='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
-			try:
-				for ext in cog_list:
+		if not extention:
+			for ext in cog_list:
+				try:
 					if ctx.message.author.id == 700376271355379823:
 						cloff.unload_extension(f'cogs.{ext}')
 						cloff.load_extension(f'cogs.{ext}')
 						await ctx.send(f"reloaded {ext}")                    
-			except Exception as e:
-				await ctx.send(e)
+				except Exception as e:
+					await ctx.send(e)
+			print("cogs reloaded")
 		else:
 			try:
 				cloff.unload_extension(f'cogs.{extention}')
 				cloff.load_extension(f'cogs.{extention}')
 				await ctx.send(f"{extention} reloaded")
+				print(extention, "reloaded")
 			except Exception as e:
 				await ctx.send(e)
 
