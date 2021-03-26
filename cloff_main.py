@@ -23,40 +23,40 @@ cloff.remove_command('help')
 
 cog_list = []
 for cog in os.listdir(path_to_file + "/cogs"):
-    if cog.endswith(".py"):
-        cog_list.append(cog[:-3])
+	if cog.endswith(".py"):
+		cog_list.append(cog[:-3])
 
 print('\n###########################################')
 
 @cloff.command()
 async def reload(ctx, extention='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu'):
-    if ctx.message.author.id != 700376271355379823:
-        await ctx.send("You do not have permission to run this command :pig_nose:")
-    else:
-        if extention=='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
-            try:
-                for ext in cog_list:
-                    if ctx.message.author.id == 700376271355379823:
-                        cloff.unload_extension(f'cogs.{ext}')
-                        cloff.load_extension(f'cogs.{ext}')
-                        await ctx.send(f"reloaded {ext}")                    
-            except Exception as e:
-                await ctx.send(e)
-        else:
-            try:
-                cloff.unload_extension(f'cogs.{extention}')
-                cloff.load_extension(f'cogs.{extention}')
-                await ctx.send(f"{extention} reloaded")
-            except Exception as e:
-                await ctx.send(e)
+	if ctx.message.author.id != 700376271355379823:
+		await ctx.send("You do not have permission to run this command :pig_nose:")
+	else:
+		if extention=='vyuyteaiuycniyauwtdnaxiwtnaditzyweuxdiytnecbu':
+			try:
+				for ext in cog_list:
+					if ctx.message.author.id == 700376271355379823:
+						cloff.unload_extension(f'cogs.{ext}')
+						cloff.load_extension(f'cogs.{ext}')
+						await ctx.send(f"reloaded {ext}")                    
+			except Exception as e:
+				await ctx.send(e)
+		else:
+			try:
+				cloff.unload_extension(f'cogs.{extention}')
+				cloff.load_extension(f'cogs.{extention}')
+				await ctx.send(f"{extention} reloaded")
+			except Exception as e:
+				await ctx.send(e)
 
 
 @cloff.command()
 async def uptime(ctx):
-    uptime = str(datetime.datetime.now()-time_start).split(":")
-    await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
+	uptime = str(datetime.datetime.now()-time_start).split(":")
+	await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 for filename in cog_list:
-    cloff.load_extension(f"cogs.{filename}")
+	cloff.load_extension(f"cogs.{filename}")
 
 cloff.run(my_ass)
