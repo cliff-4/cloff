@@ -22,14 +22,20 @@ cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
 
 cog_list = []
-for cog in os.listdir(path_to_file + "/cogs"):
-	if cog.endswith(".py"):
-		cog_list.append(cog[:-3])
+
+def cogging():
+	cog_list = []
+	for cog in os.listdir(path_to_file + "/cogs"):
+		if cog.endswith(".py"):
+			cog_list.append(cog[:-3])
+
+cogging()
 
 print('\n'+43*'#')
 
 @cloff.command()
 async def reload(ctx, extention=''):
+	cogging()
 	if ctx.message.author.id != 700376271355379823:
 		await ctx.send("You do not have permission to run this command :pig_nose:")
 	else:
@@ -54,6 +60,7 @@ async def reload(ctx, extention=''):
 
 @cloff.command()
 async def load(ctx, extention=''):
+	cogging()
 	if ctx.message.author.id != 700376271355379823:
 		await ctx.send("You do not have permission to run this command :pig_nose:")
 	else:
@@ -75,6 +82,7 @@ async def load(ctx, extention=''):
 
 @cloff.command()
 async def unload(ctx, extention=''):
+	cogging()
 	if ctx.message.author.id != 700376271355379823:
 		await ctx.send("You do not have permission to run this command :pig_nose:")
 	else:
