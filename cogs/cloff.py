@@ -43,6 +43,10 @@ class cloff_the_bot(commands.Cog):
 		await ctx.send('r'+int(n)*'e')
 
 	@commands.command()
+	async def test(self, ctx):
+		await ctx.send(ctx.channel.name)
+
+	@commands.command()
 	async def REE(self, ctx, n=50):
 		await ctx.send('R'+int(n)*'E')
 

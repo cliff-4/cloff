@@ -38,12 +38,12 @@ class reddit_images(commands.Cog):
 				submissions = k.hot()
 				for i in range(0, random.randint(1, 10)):
 					submission = next(x for x in submissions if not x.stickied)
-				await ctx.send(f'"{submission.title}"\n{submission.url}')
+				await ctx.send(f'**{submission.title}**\nby r/{submission.author.name}\n{submission.url}')
 			else:
 				submissions = k.hot()
-				for i in range(0, random.randint(1, 10)):
+				for i in range(0, random.randint(1, 100)):
 					submission = next(x for x in submissions if not x.stickied)
-				await ctx.send(f'**[NSFW]**\n"{submission.title}"\n_(Requested by <@!{ctx.message.author.id}>)_\n{submission.url}')
+				await ctx.send(f'**[NSFW]** _(Requested by <@!{ctx.message.author.id}>)_\n**{submission.title}**\nby r/{submission.author.name}\n{submission.url}')
 		except Exception as e:
 			await ctx.send(e)
 
