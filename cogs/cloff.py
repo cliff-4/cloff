@@ -14,6 +14,10 @@ class cloff_the_bot(commands.Cog):
 	async def on_ready(self):
 		print('bitch im ready')
 
+	@commands.command()
+	async def test(self, ctx):
+		await ctx.send(ctx.message.content[1:3])
+
 	@commands.command(aliases=['h'])
 	async def help(self, ctx):
 		author = None #ctx.message.author
@@ -59,10 +63,6 @@ class cloff_the_bot(commands.Cog):
 	@commands.command()
 	async def ree(self, ctx, n=50):
 		await ctx.send('r'+int(n)*'e')
-
-	@commands.command()
-	async def test(self, ctx):
-		await ctx.send(ctx.channel.is_nsfw())
 
 	@commands.command()
 	async def REE(self, ctx, n=50):
