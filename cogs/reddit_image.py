@@ -34,16 +34,16 @@ class reddit_images(commands.Cog):
 	async def r(self, ctx, sub="dankmemes"):
 		try:
 			k = self.reddit.subreddit(sub)
-			if not k.over18:
-				submissions = k.hot()
-				for i in range(0, random.randint(1, 10)):
-					submission = next(x for x in submissions if not x.stickied)
-				await ctx.send(f'**{submission.title}**\nby r/{submission.author.name}\n{submission.url}')
+			if (k.over18) and (not (ctx.channel.is_nsfw() or ctx.category.is_nsfw())):
+				await ctx.send("Can't post that here. The post is NSFW but the channel is not!")
 			else:
 				submissions = k.hot()
-				for i in range(0, random.randint(1, 100)):
+				for i in range(0, random.randint(1, 20)):
 					submission = next(x for x in submissions if not x.stickied)
-				await ctx.send(f'**[NSFW]** _(Requested by <@!{ctx.message.author.id}>)_\n**{submission.title}**\nby r/{submission.author.name}\n{submission.url}')
+				kk = ''
+				if k.over18:
+					kk = f'_(Requested by <@!{ctx.message.author.id}>)_\n'
+				await ctx.send(f'{kk}**{submission.title}**\nby r/{submission.author.name}\n{submission.url}')
 		except Exception as e:
 			await ctx.send(e)
 

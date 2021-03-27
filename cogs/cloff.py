@@ -14,7 +14,30 @@ class cloff_the_bot(commands.Cog):
 	async def on_ready(self):
 		print('bitch im ready')
 
-	@commands.command(aliases=['p'])
+	@commands.command(aliases=['h'])
+	async def help(self, ctx):
+		author = None #ctx.message.author
+		embed = discord.Embed(
+			colour = discord.Colour(0xe08e00)
+		)
+		embed.set_author(name="Help")
+		embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
+		embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
+		embed.add_field(name=';purge n', value='Purges last n messages. Default n=1', inline=True)
+		embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
+		embed.add_field(name=';cuss @user', value='Sends a not so cheerish message', inline=True)
+		embed.add_field(name=';bully @user', value='Basically ;cuss, but better.', inline=True)
+		embed.add_field(name=';spam argument', value='Spams the argument, of course.', inline=True)
+		embed.add_field(name=';echo argument', value='Just returns the argument. Nothing too fancy.', inline=True)
+		embed.add_field(name=';ree n', value='When you just wanna express yourself', inline=False)
+		embed.add_field(name=';REE n', value="Try ;REE 100, why don't you.", inline=True)
+		embed.add_field(name=';AAA n', value="You get the point.", inline=True)
+		embed.add_field(name=';good bot', value='If you ever wanna appreciate this good-for-nothing ~~slave~~ bot.', inline=False)
+		embed.add_field(name=';help', value='Displays this help card', inline=False)
+
+		await ctx.send(author, embed=embed)	
+
+	@commands.command()
 	async def ping(self, ctx):
 		k = random.randint(1,100)
 		if 1<=k<=80:
@@ -24,11 +47,6 @@ class cloff_the_bot(commands.Cog):
 		elif k == 100:
 			await ctx.send("Pong!")
 		
-	@commands.command()
-	async def cursed(self, ctx):
-		dir = path_to_file + "/images/cursedcomments"
-		await ctx.send(file=discord.File(f"{dir}/{os.listdir(dir)[random.randint(0,len(os.listdir(dir))-1)]}"))
-
 	@commands.command(aliases=["yeet", "yeetus", "dismiss", "remove", "rm", "clear"])
 	async def purge(self, ctx, n=1):
 		if n>=100:
@@ -44,7 +62,7 @@ class cloff_the_bot(commands.Cog):
 
 	@commands.command()
 	async def test(self, ctx):
-		await ctx.send(ctx.channel.name)
+		await ctx.send(ctx.channel.is_nsfw())
 
 	@commands.command()
 	async def REE(self, ctx, n=50):
@@ -63,23 +81,6 @@ class cloff_the_bot(commands.Cog):
 		cusses = ["Fuck you", "Fuck you too", "Nobody loves you", "You're going to die alone", "You got cooties"]
 		phrase = cusses[random.randint(0, len(cusses)-1)]
 		await ctx.send(f"{phrase} {argument}")
-
-	@commands.command(aliases=['h'])
-	async def help(self, ctx):
-		author = None #ctx.message.author
-		embed = discord.Embed(
-			colour = discord.Colour(0xe08e00)
-		)
-		embed.set_author(name="Help")
-
-		embed.add_field(name=';cursed', value='Sends a cursed image from the interwebs', inline=False)
-		embed.add_field(name=';purge n', value='Purges last n messages.', inline=False)
-		embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
-		embed.add_field(name=';ree n', value='When you just wanna express yourself', inline=False)
-		embed.add_field(name=';REE n', value="Try ;REE 100, why don't you.", inline=False)
-		embed.add_field(name=';help', value='Displays this help card', inline=False)
-
-		await ctx.send(author, embed=embed)
 	
 	@commands.command(aliases = ['hi', 'sup', 'yo'])
 	async def hello(self, ctx):
@@ -176,6 +177,14 @@ You have the right to remain silent because whatever you say will be stupid anyw
 	async def quote(self, ctx):
 		k = None
 
+	@commands.command(aliases=['wp'])
+	async def water_ping(self, ctx):
+		k = None
+		#check if server has agreed for waterping. if not, and the person who ran isnt admin, return "ask admin to enable"
+		#if admin, add server to list and check if it has a waterping channel.
+		#if not, add a channel and start sending waterpings to it. also create roll w blue colour.
+		#after admin, whoever runs waterping, add them to the role of waterping and send that they have been added.
+		#also tell them if they want to be removed from waterping, run ;water_ping or ;wp
 
 
 def setup(cloff):
