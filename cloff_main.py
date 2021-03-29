@@ -10,14 +10,11 @@ import builtins
 #set path_to_file as a variable to be used across modules
 __builtins__.path_to_file = str(os.path.dirname(os.path.abspath(__file__)))
 __builtins__.devs = [700376271355379823]
-
+__builtins__.time_start = datetime.datetime.now() #time recorded at the start of bot to get ;uptime
 #to get discord token from conf.ini
 info = ConfigParser()
 info.read(path_to_file + '/conf.ini')
 my_ass = info['DISCORD']['token']
-
-#time recorded at the start of bot to get ;uptime
-time_start = datetime.datetime.now()
 
 cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
@@ -83,11 +80,6 @@ async def load(ctx, extention=''):
 					await ctx.send(e)
 	else:
 		await ctx.send("You do not have the permission to run this command :pig_nose:")
-
-@cloff.command()
-async def uptime(ctx):
-	uptime = str(datetime.datetime.now()-time_start).split(":")
-	await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 for filename in cog_list:
 	cloff.load_extension(f"cogs.{filename}")

@@ -14,32 +14,33 @@ class cloff_the_bot(commands.Cog):
 	async def on_ready(self):
 		print('bitch im ready')
 
-	@commands.command()
-	async def test(self, ctx):
-		await ctx.send(ctx.message.content[1:3])
-
 	@commands.command(aliases=['h'])
-	async def help(self, ctx):
-		author = None #ctx.message.author
-		embed = discord.Embed(
-			colour = discord.Colour(0xe08e00)
-		)
-		embed.set_author(name="Help")
-		embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
-		embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
-		embed.add_field(name=';purge n', value='Purges last n messages. Default n=1', inline=True)
-		embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
-		embed.add_field(name=';cuss @user', value='Sends a not so cheerish message', inline=True)
-		embed.add_field(name=';bully @user', value='Basically ;cuss, but better.', inline=True)
-		embed.add_field(name=';spam argument', value='Spams the argument, of course.', inline=True)
-		embed.add_field(name=';echo argument', value='Just returns the argument. Nothing too fancy.', inline=True)
-		embed.add_field(name=';ree n', value='When you just wanna express yourself', inline=False)
-		embed.add_field(name=';REE n', value="Try ;REE 100, why don't you.", inline=True)
-		embed.add_field(name=';AAA n', value="You get the point.", inline=True)
-		embed.add_field(name=';good bot', value='If you ever wanna appreciate this good-for-nothing ~~slave~~ bot.', inline=False)
-		embed.add_field(name=';help', value='Displays this help card', inline=False)
+	async def help(self, ctx, *args):
+		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'REE', 'AAA', 'good', 'help']
+		if not args: args = all_commands
+		if len(list(set(args).intersection(all_commands))) == 0:
+			await ctx.send("The command doesn't exist. Please try ;help")
+		else:
+			author = None #ctx.message.author
+			embed = discord.Embed(
+				colour = discord.Colour(0xe08e00)
+			)
+			embed.set_author(name="Help")
+			if 'hello' in args: embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
+			if 'reddit' in args: embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
+			if 'purge' in args: embed.add_field(name=';purge n', value='Purges last **n** messages. Default **n** = **1**', inline=True)
+			if 'ping' in args: embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
+			if 'cuss' in args: embed.add_field(name=';cuss @user', value='Sends a _not so cheerish_ message', inline=True)
+			if 'bully' in args: embed.add_field(name=';bully @user', value='Basically **;cuss**, but better.', inline=True)
+			if 'spam' in args: embed.add_field(name=';spam arg n', value='Spams the **arg** **n** times, of course. For example, if you wanna spam 3, do **;spam 3 10**', inline=True)
+			if 'echo' in args: embed.add_field(name=';echo arg', value='Just returns the **arg**. Nothing too fancy.', inline=True)
+			if 'ree' in args: embed.add_field(name=';ree n', value='When you just wanna express yourself', inline=False)
+			if 'REE' in args: embed.add_field(name=';REE n', value="Try **;REE 100**, why don't you.", inline=True)
+			if 'AAA' in args: embed.add_field(name=';AAA n', value="You get the point.", inline=True)
+			if 'good' in args: embed.add_field(name=';good bot', value='If you ever wanna appreciate this good-for-nothing ~~slave~~ bot.', inline=False)
+			if 'help' in args: embed.add_field(name=';help', value='Displays this **help** card', inline=False)
 
-		await ctx.send(author, embed=embed)	
+			await ctx.send(author, embed=embed)	
 
 	@commands.command()
 	async def ping(self, ctx):
@@ -144,7 +145,15 @@ You have the right to remain silent because whatever you say will be stupid anyw
 		await ctx.send(split_list[random.randint(0, len(split_list)-1)])
 
 	@commands.command()
-	async def spam(self, ctx, argument='', times=5):
+	async def spam(self, ctx, *argument):
+		argument = list(argument)
+		times = 10
+		try:
+			if type(int(argument[-1])) is int:
+				times = int(argument[-1])
+				argument.pop()
+		except Exception as e:
+			await ctx.send(e)
 		if times > 10:
 			try:
 				await ctx.send("Ew no not gonna spam that many")
@@ -156,35 +165,10 @@ You have the right to remain silent because whatever you say will be stupid anyw
 					await ctx.send('Okay, but spam WHAT')
 				else:
 					for i in range(times):
-						await ctx.send(argument)
-						time.sleep(0.69)
+						await ctx.send(" ".join(argument))
+						time.sleep(0.5)
 			except Exception as e:
 				await ctx.send(e)
-
-#    @commands.Cog.listener()
-#    async def on_message(self, message):
-#        if message.author == cloff.user:
-#            return
-#        else:
-#            k = False
-#            for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
-#                if (f"good {term}" in message.content):
-#                    k = True
-#            if k:
-#                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
-
-	@commands.command()
-	async def quote(self, ctx):
-		k = None
-
-	@commands.command(aliases=['wp'])
-	async def water_ping(self, ctx):
-		k = None
-		#check if server has agreed for waterping. if not, and the person who ran isnt admin, return "ask admin to enable"
-		#if admin, add server to list and check if it has a waterping channel.
-		#if not, add a channel and start sending waterpings to it. also create roll w blue colour.
-		#after admin, whoever runs waterping, add them to the role of waterping and send that they have been added.
-		#also tell them if they want to be removed from waterping, run ;water_ping or ;wp
 
 
 def setup(cloff):
