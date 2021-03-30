@@ -153,12 +153,12 @@ You have the right to remain silent because whatever you say will be stupid anyw
 				times = int(argument[-1])
 				argument.pop()
 		except Exception as e:
-			await ctx.send(e)
+			print(e)
 		if times > 10:
 			try:
 				await ctx.send("Ew no not gonna spam that many")
 			except Exception as e:
-				await ctx.send(e)
+				print(e)
 		else:
 			try:
 				if not argument:
@@ -168,7 +168,7 @@ You have the right to remain silent because whatever you say will be stupid anyw
 						await ctx.send(" ".join(argument))
 						time.sleep(0.5)
 			except Exception as e:
-				await ctx.send(e)
+				print(e)
 
 
 def setup(cloff):

@@ -2,19 +2,17 @@ import os
 #import re
 #import requests
 #import asyncpraw
-from configparser import ConfigParser #
+from configparser import ConfigParser
 #import concurrent.futures
 #import argparse
 import praw
-import discord #
-from discord.ext import commands #
+import discord
+from discord.ext import commands
 import random
 import asyncio
-#import datetime
 
 class reddit_images(commands.Cog):
 	def __init__(self, cloff):
-
 		info = ConfigParser()
 		info.read(path_to_file + '/conf.ini')
 		self.client = cloff
@@ -29,7 +27,6 @@ class reddit_images(commands.Cog):
 	async def on_ready(self):
 		print('RID package ready') #Reddit Image Downloader
 		
-
 	@commands.command(aliases=["reddit", "Reddit", "R"])
 	async def r(self, ctx, sub="dankmemes"):
 		try:

@@ -10,6 +10,10 @@ class water_ping(commands.Cog):
 	def cog_unload(self):
 		self.water.cancel()
 	
+	@commands.Cog.listener()
+	async def on_ready(self):
+		print('tasts ready')
+
 	@tasks.loop(seconds=2)
 	async def water(self):
 		k = None

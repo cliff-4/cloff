@@ -19,35 +19,46 @@ class commands_under_development(commands.Cog):
 		uptime = str(datetime.datetime.now()-time_start).split(":")
 		await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
-	@commands.command()
+	@commands.command(aliases=['t'])
 	async def test(self, ctx):
-		await ctx.send(ctx.message.content[1:3])
-
-#    @commands.Cog.listener()
-#    async def on_message(self, message):
-#        if message.author == cloff.user:
-#            return
-#        else:
-#            k = False
-#            for term in ['boy', 'girl', 'boi', 'gorl', 'slave', 'cloffo', 'cloff']:
-#                if (f"good {term}" in message.content):
-#                    k = True
-#            if k:
-#                await message.channel.send(f"uwu thanks {str(message.author)[:-5]}")
+		try:	
+			await ctx.send(ctx.message.channel.id)
+		except Exception as e:
+			await ctx.send(e)
 
 	@commands.command()
 	async def quote(self, ctx):
-		k = None
+		0
 
 	@commands.command(aliases=['wp'])
 	async def water_ping(self, ctx):
-		k = None
+		0
 		#check if server has agreed for waterping. if not, and the person who ran isnt admin, return "ask admin to enable"
 		#if admin, add server to list and check if it has a waterping channel.
 		#if not, add a channel and start sending waterpings to it. also create roll w blue colour.
 		#after admin, whoever runs waterping, add them to the role of waterping and send that they have been added.
 		#also tell them if they want to be removed from waterping, run ;water_ping or ;wp
 
+		#waterping channel in bot server: 826193848476500019
+
+
+class youtube_uwu(commands.Cog):
+
+	def __init__(self, cloff):
+		info = ConfigParser()
+		info.read(path_to_file + '/conf.ini')
+		self.client = cloff
+		youtube_api_key = info["YOUTUBE"]["api_key"],
+	
+	@commands.Cog.listener()
+	async def on_ready(self):
+		0
+		#print('youtube ready')
+
+	@commands.command(aliases=['youtube'])
+	async def yt(self, ctx):
+		0
 
 def setup(cloff):
 	cloff.add_cog(commands_under_development(cloff))
+#	cloff.add_cog(youtube_uwu(cloff))
