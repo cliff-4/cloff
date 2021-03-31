@@ -16,18 +16,17 @@ class cloff_the_bot(commands.Cog):
 
 	@commands.command(aliases=['h'])
 	async def help(self, ctx, *args):
-		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'REE', 'AAA', 'good', 'help']
+		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'REE', 'AAA', 'good', 'help', 'dictionary', 'dict']
 		if not args: args = all_commands
-		if len(list(set(args).intersection(all_commands))) == 0:
+		if len(set(args).intersection(all_commands)) == 0:
 			await ctx.send("The command doesn't exist. Please try ;help")
 		else:
 			author = None #ctx.message.author
-			embed = discord.Embed(
-				colour = discord.Colour(0xe08e00)
-			)
+			embed = discord.Embed(colour = discord.Colour(0xe08e00))
 			embed.set_author(name="Help")
 			if 'hello' in args: embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
 			if 'reddit' in args: embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
+			if ('dictionary' in args) or ('dict' in args): embed.add_field(name=';dictionary word', value='Gives the definition of the **word**', inline=False)
 			if 'purge' in args: embed.add_field(name=';purge n', value='Purges last **n** messages. Default **n** = **1**', inline=True)
 			if 'ping' in args: embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
 			if 'cuss' in args: embed.add_field(name=';cuss @user', value='Sends a _not so cheerish_ message', inline=True)

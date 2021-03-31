@@ -19,23 +19,35 @@ class dictionaryyy(commands.Cog):
 		print('dictionary ready')
 
 	@commands.command(aliases=['d', 'D', 'dict', 'Dict'])
-	async def dictionary(self, ctx, word): #2 modules loaded and one line of code in __init__()
-		word = word.upper()
-		definition = self.entire_dictionary[word[0]][word]["MEANINGS"]
-		lines = []
+	async def dictionary(self, ctx, word):
 		try:
-			try:
-				for i in range(min(4, len(definition)-1)):
-					list = definition[str(i+1)]
-					lines.append(f"{list[0]}: {list[1].capitalize()}")
-					await ctx.send(f"""{list[0]}: {list[1].capitalize()}""")
-			except KeyError:
-				spell = SpellChecker()
-				list = spell.candidates(word)
-				await ctx.send(f"That word might be wrong. Did you instead mean any of these:\n\n**{', '.join(list)}**")
-		except Exception as e:
-			await ctx.send(e)
+			word = word.upper()
+			tip = ''
+			if word[-1] == 'S': tip='\n_Tip: If the argument is plural, try passing the argument in singular form._'
+			definition = self.entire_dictionary[word[0]][word]["MEANINGS"]
+			if not definition:
+				await ctx.send(f"Sorry, but I don't know the meaning of **{word.lower()}** :({tip}")
+			else:
+				verbs = []
+				nouns = []
+				for i in list(definition):
+					if definition[i][0].lower() == 'verb': verbs.append(f"_{definition[i][0]}_ {chr(8226)} {definition[i][1].capitalize()}")
+					if definition[i][0].lower() == 'noun': nouns.append(f"_{definition[i][0]}_ {chr(8226)} {definition[i][1].capitalize()}")
+				verbs = "\n".join(verbs[:min(3, len(verbs))])
+				nouns = "\n".join(nouns[:min(3, len(nouns))])
+				embed = discord.Embed(colour= discord.Colour(0xff0000))
+				embed.set_author(name='Definition')
+				embed.add_field(name=f'"{word.capitalize()}"', value=f"\n{nouns}\n{verbs}")
+				await ctx.send(embed=embed)
 
+		except KeyError:
+			try:
+				if bool(SpellChecker().known([word])):
+					await ctx.send(f"Sorry, but I don't know the meaning of **{word.lower()}** :({tip}")
+				else:
+					await ctx.send(f"That word might be wrong. Did you instead mean any of these:\n**{', '.join(kek)}**\n({tip})")
+			except Exception as e:
+				await ctx.send(e)
 
 def setup(cloff):
 	cloff.add_cog(dictionaryyy(cloff))

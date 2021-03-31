@@ -29,11 +29,10 @@ class commands_under_development(commands.Cog):
 	async def test(self, ctx):
 		try:	
 			###
-			user = ctx.message.author
-			await ctx.guild.create_role(name="water buddies", colour = discord.Colour(0x40dde6))
-			rollee = discord.utils.get(ctx.guild.roles, name="water buddies").id
-			#await user.add_roles(rollee)
-			await ctx.send(rollee)
+			embed = discord.Embed(colour = discord.Colour(0xe08e00))
+			embed.set_author(name="Title")
+			embed.add_field(name='content', value='https://i.redd.it/6se1e93nncq61.gif', inline=True)
+			await ctx.send(embed=embed)	
 			###
 		except Exception as e:
 			await ctx.send(e)

@@ -27,5 +27,9 @@ class water_ping(commands.Cog):
 		except Exception as e:
 			0
 
+	@water.before_loop
+	async def before_water(self):
+		await self.client.wait_until_ready()
+
 def setup(cloff):
 	cloff.add_cog(water_ping(cloff))
