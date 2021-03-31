@@ -12,11 +12,12 @@ class water_ping(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
-		print('tasts ready')
+		print('tasks ready')
 
-	@tasks.loop(seconds=2)
+	@tasks.loop(hours=1)
 	async def water(self):
-		k = None
+		channel = self.client.get_channel(826193848476500019)
+		await channel.send('pong')
 		#import channel list
 			#check if channel exists
 			#if not and server has agreed for water ping, create channel and add to list
