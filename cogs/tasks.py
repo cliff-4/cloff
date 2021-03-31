@@ -16,12 +16,16 @@ class water_ping(commands.Cog):
 
 	@tasks.loop(hours=1)
 	async def water(self):
-		channel = self.client.get_channel(826193848476500019)
-		await channel.send('pong')
-		#import channel list
-			#check if channel exists
-			#if not and server has agreed for water ping, create channel and add to list
-			#send water ping
+		try:
+			channel = self.client.get_channel(826193848476500019)
+			
+			await channel.send('Remember to drink water yoo :sweat_drops:\n<@&826838004249264138>')
+			#import channel list
+				#check if channel exists
+				#if not and server has agreed for water ping, create channel and add to list
+				#send water ping
+		except Exception as e:
+			0
 
 def setup(cloff):
 	cloff.add_cog(water_ping(cloff))

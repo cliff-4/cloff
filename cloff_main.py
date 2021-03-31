@@ -43,10 +43,11 @@ async def load(ctx, extention=''):
 
 		if not extention: #if extention is not given, itll cycle through all the extentions in the cog folder.
 			for ext in cog_list:
+				time1 = datetime.datetime.now()
 				try:
 					if unloading: cloff.unload_extension(f'cogs.{ext}')
 					if loading: cloff.load_extension(f'cogs.{ext}')
-					await ctx.send(f"{to_do} [{ext}]")
+					await ctx.send(f"{to_do} [{ext}]\t_executed in {str(datetime.datetime.now()-time1)[-8:-3]} s_")
 					print(f"~{to_do} [{ext}]")
 				except:
 					try:
@@ -56,15 +57,16 @@ async def load(ctx, extention=''):
 							if unloading: cloff.unload_extension(f'cogs.{ext}')
 						else:
 							cloff.load_extension(f'cogs.{ext}')
-						await ctx.send(f"{to_do} [{ext}]")
+						await ctx.send(f"{to_do} [{ext}]\t_executed in {str(datetime.datetime.now()-time1)[-8:-3]} s_")
 						print(f"~{to_do} [{ext}]")
 					except Exception as e:
 						await ctx.send(e)
 		else:
+			time1 = datetime.datetime.now()
 			try:
 				if unloading: cloff.unload_extension(f'cogs.{extention}')
 				if loading: cloff.load_extension(f'cogs.{extention}')
-				await ctx.send(f"{to_do} [{extention}]")
+				await ctx.send(f"{to_do} [{extention}]\t_executed in {str(datetime.datetime.now()-time1)[-8:-3]} s_")
 				print(f"~{to_do} [{extention}]")
 			except:
 				try:
@@ -74,7 +76,7 @@ async def load(ctx, extention=''):
 						if unloading: cloff.unload_extension(f'cogs.{extention}')
 					else:
 						cloff.load_extension(f'cogs.{extention}')
-					await ctx.send(f"{to_do} [{extention}]")
+					await ctx.send(f"{to_do} [{extention}]\t_executed in {str(datetime.datetime.now()-time1)[-8:-3]} s_")
 					print(f"~{to_do} [{extention}]")
 				except Exception as e:
 					await ctx.send(e)
