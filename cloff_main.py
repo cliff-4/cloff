@@ -8,32 +8,36 @@ from configparser import ConfigParser
 import builtins
 
 #set path_to_file as a variable to be used across modules
-__builtins__.path_to_file = str(os.path.dirname(os.path.abspath(__file__)))
-__builtins__.devs = [700376271355379823]
-__builtins__.time_start = datetime.datetime.now() #time recorded at the start of bot to get ;uptime
+__builtins__.cloff_dict = {
+	'path_to_file' : str(os.path.dirname(os.path.abspath(__file__))),
+	'devs' : [700376271355379823],
+	'time_start' : datetime.datetime.now(),
+	'error_channel_id' : 827694723555786772
+} #prolly wanna keep this in json file with you (when hosting bot on other server)
+
 #to get discord token from conf.ini
 info = ConfigParser()
-info.read(path_to_file + '/conf.ini')
+info.read(cloff_dict['path_to_file'] + '/conf.ini')
 my_ass = info['DISCORD']['token']
 
 cloff = commands.Bot(command_prefix=";")
 cloff.remove_command('help')
 
-def cog_update(path_to_file):
+def cog_update():
 	global cog_list
 	cog_list = []
-	for cog in os.listdir(path_to_file + "/cogs"):
+	for cog in os.listdir(cloff_dict['path_to_file'] + "/cogs"):
 		if cog.endswith(".py"):
 			cog_list.append(cog[:-3])
 
-cog_update(path_to_file)
+cog_update()
 
 print('\n'+43*'#')
 
 @cloff.command(name='cogging', aliases=['unload', 'reload', 'l', 'ul', 'rl', 'load'])
 async def load(ctx, extention=''):
-	if ctx.message.author.id in devs:
-		cog_update(path_to_file)
+	if ctx.message.author.id in cloff_dict['devs']:
+		cog_update()
 		keyword = str(ctx.message.content[1:2])
 		
 		loading, unloading = False, False

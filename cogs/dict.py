@@ -12,7 +12,7 @@ class dictionaryyy(commands.Cog):
 
 		for i in range(1, 27):
 			A = chr(96+i).upper()
-			with open(path_to_file + f'/database/dictionary/D{A}.json', 'r') as myfile: self.entire_dictionary[A] = json.loads(myfile.read())
+			with open(cloff_dict['path_to_file'] + f'/database/dictionary/D{A}.json', 'r') as myfile: self.entire_dictionary[A] = json.loads(myfile.read())
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
@@ -43,11 +43,17 @@ class dictionaryyy(commands.Cog):
 		except KeyError:
 			try:
 				if bool(SpellChecker().known([word])):
-					await ctx.send(f"Sorry, but I don't know the meaning of **{word.lower()}** :({tip}")
+					await ctx.send(f"Sorry, but I don't know the meaning of **{word.lower()}** :( Perhaps the archives are incomplete.{tip}")
 				else:
-					await ctx.send(f"That word might be wrong. Did you instead mean any of these:\n**{', '.join(kek)}**\n({tip})")
+					if word in SpellChecker().candidates(word):
+						await ctx.send(f"Sorry, but I don't know the meaning of **{word.lower()}** :({tip}")
+					else:
+						await ctx.send(f"That word might be wrong. Did you instead mean any of these:\n**{', '.join(SpellChecker().candidates(word))}**{tip}")
 			except Exception as e:
-				await ctx.send(e)
+				await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+
+		except Exception as e:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
 
 def setup(cloff):
 	cloff.add_cog(dictionaryyy(cloff))

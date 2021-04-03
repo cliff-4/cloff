@@ -16,26 +16,23 @@ class commands_under_development(commands.Cog):
 
 	@commands.command()
 	async def kill(self, ctx):
-		if ctx.message.author.id in devs:
+		if ctx.message.author.id in cloff_dict['devs']:
 			await ctx.send("_adios_")
 			exit()
 
 	@commands.command()
 	async def uptime(self, ctx):
-		uptime = str(datetime.datetime.now()-time_start).split(":")
+		uptime = str(datetime.datetime.now()-cloff_dict['time_start']).split(":")
 		await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 	@commands.command(aliases=['t'])
 	async def test(self, ctx):
 		try:	
 			###
-			embed = discord.Embed(colour = discord.Colour(0xe08e00))
-			embed.set_author(name="Title")
-			embed.add_field(name='content', value='https://i.redd.it/6se1e93nncq61.gif', inline=True)
-			await ctx.send(embed=embed)	
+			await ctx.send(ctx.message.channel.id)
 			###
 		except Exception as e:
-			await ctx.send(e)
+			await ctx.send(e) #dont wanna send this error to the error channel ykno
 
 	@commands.command()
 	async def quote(self, ctx):
@@ -57,7 +54,7 @@ class youtube_uwu(commands.Cog):
 
 	def __init__(self, cloff):
 		info = ConfigParser()
-		info.read(path_to_file + '/conf.ini')
+		info.read(cloff_dict['path_to_file'] + '/conf.ini')
 		self.client = cloff
 		youtube_api_key = info["YOUTUBE"]["api_key"],
 	
@@ -70,6 +67,41 @@ class youtube_uwu(commands.Cog):
 	async def yt(self, ctx):
 		0
 
+class le_memes(commands.Cog):
+
+	def __init__(self, cloff):
+		self.client = cloff
+		import cv2 as cv
+		path = "templates\\lisa.jpg"
+	
+	@commands.Cog.listener()
+	async def on_ready(self):
+		0
+		#print('memes ready')
+
+	@commands.command(aliases=['youtube'])
+	async def meme(self, ctx):
+		cv.namedWindow("Processed", cv.WINDOW_AUTOSIZE)
+		image = cv.imread(path) 
+		font = cv.FONT_HERSHEY_SIMPLEX 
+
+		a,b = 150,200
+
+		org = (a,b) 
+		argument = 'fuck off'
+		fontScale = 1
+		color = (255, 0, 0) 
+		thickness = 2
+		img2 = cv.putText(image, argument, org, font, fontScale, color, thickness, cv.LINE_AA) 
+		cv.imshow("Processed", img2)
+
+		k = cv.waitKey(2000)
+		if k == ord('q'):
+			cv.destroyAllWindows()
+
+		print(image.shape)
+
 def setup(cloff):
 	cloff.add_cog(commands_under_development(cloff))
 #	cloff.add_cog(youtube_uwu(cloff))
+#	cloff.add_cog(le_memes(cloff))

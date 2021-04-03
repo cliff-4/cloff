@@ -14,7 +14,7 @@ import asyncio
 class reddit_images(commands.Cog):
 	def __init__(self, cloff):
 		info = ConfigParser()
-		info.read(path_to_file + '/conf.ini')
+		info.read(cloff_dict['path_to_file'] + '/conf.ini')
 		self.client = cloff
 		self.reddit = praw.Reddit(
 				client_id = info["REDDIT"]["client_id"],
@@ -42,7 +42,7 @@ class reddit_images(commands.Cog):
 					kk = f'_(Requested by <@!{ctx.message.author.id}>)_\n'
 				await ctx.send(f'{kk}**{submission.title}**\nby u/{submission.author.name} (from r/{submission.subreddit.display_name})\n{submission.url}')
 		except Exception as e:
-			await ctx.send(e)
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
 
 def setup(cloff):
 	cloff.add_cog(reddit_images(cloff))
