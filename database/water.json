@@ -1,4 +1,11 @@
 {
-	"last_poing": 5,
-	"servers": [826193848476500019]
+	"last_poing": "2021-04-05 00:32:48.415086",
+	"servers_channels": [
+		[
+			821109620743340083,
+			826193848476500019,
+			828038372169613322
+		]
+	],
+	"comment": "server_id channel_id role_id"
 }

@@ -26,29 +26,29 @@ class commands_under_development(commands.Cog):
 		await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 	@commands.command(aliases=['t'])
-	async def test(self, ctx):
-		try:	
-			###
-			await ctx.send(ctx.message.channel.id)
-			###
+	async def test(self, ctx, aarg=None):
+		try:
+			if ctx.message.author.id in cloff_dict['devs']:
+				0
+				###
+				#list = []
+				#await ctx.guild.fetch_roles()
+				#await ctx.send(ctx.author.avatar_url)
+				
+				
+				#emoji = self.client.get_emoji(emoji_id)
+				#await ctx.message.add_reaction(emoji)
+				#ids = []
+				#for guild in self.client.guilds:
+				#	ids.append(guild.id)
+				#await ctx.send(ids)
+				### server_id = ctx.message.channel.guild.id
 		except Exception as e:
 			await ctx.send(e) #dont wanna send this error to the error channel ykno
 
 	@commands.command()
 	async def quote(self, ctx):
 		0
-
-	@commands.command(aliases=['wp'])
-	async def water_ping(self, ctx):
-		0
-		#check if server has agreed for waterping. if not, and the person who ran isnt admin, return "ask admin to enable"
-		#if admin, add server to list and check if it has a waterping channel.
-		#if not, add a channel and start sending waterpings to it. also create roll w blue colour.
-		#after admin, whoever runs waterping, add them to the role of waterping and send that they have been added.
-		#also tell them if they want to be removed from waterping, run ;water_ping or ;wp
-		#ask for timezone in wp config. dont wanna ping them all night ykno.
-
-		#waterping channel in bot server: 826193848476500019
 
 class youtube_uwu(commands.Cog):
 
@@ -76,8 +76,7 @@ class le_memes(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
-		0
-		#print('memes ready')
+		print('memes ready')
 
 	@commands.command(aliases=['youtube'])
 	async def meme(self, ctx):
