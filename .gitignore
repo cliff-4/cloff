@@ -1,2 +1,4 @@
-__pycache__/
+cogs/__pycache__/
 .vscode/
+images/.image_cache/
+.ignore/

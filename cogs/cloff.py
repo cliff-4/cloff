@@ -28,7 +28,7 @@ class cloff_the_bot(commands.Cog):
 			if 'hello' in args: embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
 			if 'reddit' in args: embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
 			if ('dictionary' in args) or ('dict' in args): embed.add_field(name=';dictionary word', value='Gives the definition of the **word**', inline=False)
-			if ('colour' in args) or ('color' in args): embed.add_field(name=';colour hexcode(without # or 0x)', value='Sends a visual of the hex code', inline=False)
+			if ('colour' in args) or ('color' in args): embed.add_field(name=';colour argument', value='Sends a visual of the argument hexcode(without # or 0x). Argument can also be a mention, or any HTML common colour name (without spaces).', inline=False)
 			if 'purge' in args: embed.add_field(name=';purge n', value='Purges last **n** messages. Default **n** = **1**', inline=True)
 			if 'ping' in args: embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
 			if 'cuss' in args: embed.add_field(name=';cuss @user', value='Sends a _not so cheerish_ message', inline=True)
@@ -63,7 +63,6 @@ class cloff_the_bot(commands.Cog):
 		else:    
 			#await ctx.send(ctx.log_froms(ctx.get_channel(discord.utils.get(ctx.guild.channels, name=given_name).id), 100))
 			await ctx.channel.purge(limit=n+1)
-
 
 	@commands.command()
 	async def ree(self, ctx, n=50):
@@ -142,23 +141,6 @@ class cloff_the_bot(commands.Cog):
 						time.sleep(0.5)
 			except Exception as e:
 				print(e)
-
-	@commands.command(aliases = ['color'])
-	async def colour(self, ctx, hex_string):
-		try:
-			R = int(hex_string[:2], 16)
-			G = int(hex_string[2:4], 16)
-			B = int(hex_string[4:], 16)
-			img = np.full([100,100,3], np.array([B,G,R]), dtype=np.uint8)
-
-			image_path = cloff_dict['path_to_file']+f"/images/hex_images/{hex_string}.png"
-
-			cv.imwrite(image_path, img)
-			file = discord.File(image_path)
-			await ctx.send(f"HEX: {hex_string}\nRGB: {[R,G,B]}", file=file)
-		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
-
 
 def setup(cloff):
 	cloff.add_cog(cloff_the_bot(cloff))
