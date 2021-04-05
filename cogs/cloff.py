@@ -17,7 +17,7 @@ class cloff_the_bot(commands.Cog):
 
 	@commands.command(aliases=['h'])
 	async def help(self, ctx, *args):
-		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'aaa', 'good', 'help', 'dictionary', 'dict', 'colour', 'color']
+		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'aaa', 'good', 'help', 'dictionary', 'dict', 'colour', 'color', 'water', 'wp']
 		if not args: args = all_commands
 		
 		args = [arg.lower() for arg in args]
@@ -30,6 +30,7 @@ class cloff_the_bot(commands.Cog):
 			embed.set_author(name="Help")
 			if 'hello' in args: embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
 			if 'reddit' in args: embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
+			if ('water' in args) or ('wp' in args): embed.add_field(name=';water', value='Will remind you to drink water every hour.', inline=False)
 			if ('dictionary' in args) or ('dict' in args): embed.add_field(name=';dictionary word', value='Gives the definition of the **word**', inline=False)
 			if ('colour' in args) or ('color' in args): embed.add_field(name=';colour argument', value='Sends a visual of the argument hexcode(without # or 0x). Argument can be a mention or any HTML common colour name (without spaces). You can pass multiple arguments at once too :)', inline=False)
 			if 'purge' in args: embed.add_field(name=';purge n', value='Purges last **n** messages. Default **n** = **1**', inline=True)
