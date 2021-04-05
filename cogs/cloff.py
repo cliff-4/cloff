@@ -63,8 +63,8 @@ class cloff_the_bot(commands.Cog):
 		if n>=100:
 			await ctx.send("Fuck no")
 		else:    
-			#await ctx.send(ctx.log_froms(ctx.get_channel(discord.utils.get(ctx.guild.channels, name=given_name).id), 100))
 			await ctx.channel.purge(limit=n+1)
+			await (await ctx.send(f"_Successfully deleted {n} messages_ :wastebasket:")).delete(delay=1.5)
 
 	@commands.command()
 	async def ree(self, ctx, n=50):

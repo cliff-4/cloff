@@ -34,7 +34,7 @@ class commands_under_development(commands.Cog):
 				#list = []
 				#await ctx.guild.fetch_roles()
 				#await ctx.send(ctx.author.avatar_url)
-				await ctx.send('k')
+				await ctx.send("Ѕвездата од Кутлеш ('Sun of Kutleš'), Republic of Macedonia (historical flag)")
 				#emoji = self.client.get_emoji(emoji_id)
 				#await ctx.message.add_reaction(emoji)
 				#ids = []
