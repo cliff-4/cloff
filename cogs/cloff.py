@@ -28,7 +28,7 @@ class cloff_the_bot(commands.Cog):
 			if 'hello' in args: embed.add_field(name=';hello', value='Why not greet this friendly bot!', inline=False)
 			if 'reddit' in args: embed.add_field(name=';reddit subreddit', value='Sends a random image from that subreddit', inline=True)
 			if ('dictionary' in args) or ('dict' in args): embed.add_field(name=';dictionary word', value='Gives the definition of the **word**', inline=False)
-			if ('colour' in args) or ('color' in args): embed.add_field(name=';colour argument', value='Sends a visual of the argument hexcode(without # or 0x). Argument can also be a mention, or any HTML common colour name (without spaces).', inline=False)
+			if ('colour' in args) or ('color' in args): embed.add_field(name=';colour argument', value='Sends a visual of the argument hexcode(without # or 0x). Argument can be a mention or any HTML common colour name (without spaces). You can pass multiple arguments at once too :)', inline=False)
 			if 'purge' in args: embed.add_field(name=';purge n', value='Purges last **n** messages. Default **n** = **1**', inline=True)
 			if 'ping' in args: embed.add_field(name=';ping', value='returns Pong! I swear. Try it.', inline=False)
 			if 'cuss' in args: embed.add_field(name=';cuss @user', value='Sends a _not so cheerish_ message', inline=True)

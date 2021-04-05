@@ -26,16 +26,21 @@ class commands_under_development(commands.Cog):
 		await ctx.send(f"cloff has been online for {uptime[0]} hours, {uptime[1]} minutes and {round(float(uptime[2]))} seconds.")
 
 	@commands.command(aliases=['t'])
-	async def test(self, ctx, aarg=None):
+	async def test(self, ctx, *args):
 		try:
 			if ctx.message.author.id in cloff_dict['devs']:
-				0
+				
 				###
 				#list = []
 				#await ctx.guild.fetch_roles()
 				#await ctx.send(ctx.author.avatar_url)
+				file = discord.File(f"{cloff_dict['path_to_file']}/images/.image_cache/hex_images/000000.png")
 				
+				e = discord.Embed()
 				
+				e.set_image(url=f"attachment://{cloff_dict['path_to_file']}/images/.image_cache/hex_images/000000.png")
+				k='40dde6'
+				await ctx.send('k')
 				#emoji = self.client.get_emoji(emoji_id)
 				#await ctx.message.add_reaction(emoji)
 				#ids = []
