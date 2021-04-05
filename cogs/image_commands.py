@@ -34,7 +34,7 @@ class images_uwu(commands.Cog):
 		except Exception as e:
 			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
 
-	@commands.command(aliases = ['color', 'c', 'Color', 'Colour'])
+	@commands.command(aliases = ['color', 'c', 'Color', 'Colour', 'C'])
 	async def colour(self, ctx, *arguments):
 		try:
 			if not arguments: arguments = ['000000']
@@ -92,7 +92,7 @@ class images_uwu(commands.Cog):
 				url = str(((message_instance).attachments)[0].url)
 				embed = discord.Embed(title=f";colour {argument.upper()}", colour=discord.Colour(int(f"0x{argument}", 16)))
 				embed.set_image(url = url)
-				embed.add_field(name = 'Colour', value=f"{men}\nHEX: **0x{argument.upper()}**\nRGB: **{(R,G,B)}**\n{com}")
+				embed.add_field(name = 'Colour', value=f"{men}\nHEX: 0x**{argument.upper()}**\nRGB: **{(R,G,B)}**\n{com}")
 				await ctx.send(embed = embed)
 				await message_instance.delete(delay=1)
 		except Exception as e:

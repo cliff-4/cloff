@@ -17,8 +17,11 @@ class cloff_the_bot(commands.Cog):
 
 	@commands.command(aliases=['h'])
 	async def help(self, ctx, *args):
-		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'REE', 'AAA', 'good', 'help', 'dictionary', 'dict', 'colour', 'color']
+		all_commands = ['hello', 'reddit', 'purge', 'ping','cuss', 'bully', 'spam', 'echo', 'ree', 'aaa', 'good', 'help', 'dictionary', 'dict', 'colour', 'color']
 		if not args: args = all_commands
+		
+		args = [arg.lower() for arg in args]
+		
 		if len(set(args).intersection(all_commands)) == 0:
 			await ctx.send("The command doesn't exist. Please try ;help")
 		else:
@@ -36,8 +39,7 @@ class cloff_the_bot(commands.Cog):
 			if 'spam' in args: embed.add_field(name=';spam arg n', value='Spams the **arg** **n** times, of course. For example, if you wanna spam 3, do **;spam 3 10**', inline=True)
 			if 'echo' in args: embed.add_field(name=';echo arg', value='Just returns the **arg**. Nothing too fancy.', inline=True)
 			if 'ree' in args: embed.add_field(name=';ree n', value='When you just wanna express yourself', inline=False)
-			if 'REE' in args: embed.add_field(name=';REE n', value="Try **;REE 100**, why don't you.", inline=True)
-			if 'AAA' in args: embed.add_field(name=';AAA n', value="You get the point.", inline=True)
+			if 'aaa' in args: embed.add_field(name=';AAA n', value="You get the point.", inline=True)
 			if 'good' in args: embed.add_field(name=';good bot', value='If you ever wanna appreciate this good-for-nothing ~~slave~~ bot.', inline=False)
 			if 'help' in args: embed.add_field(name=';help', value='Displays this **help** card', inline=False)
 
