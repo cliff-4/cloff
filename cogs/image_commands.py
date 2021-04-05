@@ -34,7 +34,7 @@ class images_uwu(commands.Cog):
 		except Exception as e:
 			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
 
-	@commands.command(aliases = ['color', 'c'])
+	@commands.command(aliases = ['color', 'c', 'Color', 'Colour'])
 	async def colour(self, ctx, *arguments):
 		try:
 			if not arguments: arguments = ['000000']
