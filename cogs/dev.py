@@ -13,6 +13,7 @@ class commands_under_development(commands.Cog):
 	@commands.Cog.listener()
 	async def on_ready(self):
 		print('dev commands ready')
+		await self.client.get_channel(cloff_dict['error_channel_id']).send([f"<@!{id}>" for id in cloff_dict['devs']])
 
 	@commands.command()
 	async def kill(self, ctx):
@@ -34,7 +35,7 @@ class commands_under_development(commands.Cog):
 				#list = []
 				#await ctx.guild.fetch_roles()
 				#await ctx.send(ctx.author.avatar_url)
-				await ctx.send("Ѕвездата од Кутлеш ('Sun of Kutleš'), Republic of Macedonia (historical flag)")
+				await ctx.send((await ctx.guild.create_role(name="water buddies", colour=discord.Colour(0x40DDE6))).id)
 				#emoji = self.client.get_emoji(emoji_id)
 				#await ctx.message.add_reaction(emoji)
 				#ids = []

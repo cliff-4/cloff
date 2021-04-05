@@ -121,7 +121,7 @@ class cloff_the_bot(commands.Cog):
 	@commands.command()
 	async def spam(self, ctx, *argument):
 		argument = list(argument)
-		times = 10
+		times = 5
 		try:
 			if type(int(argument[-1])) is int:
 				times = int(argument[-1])

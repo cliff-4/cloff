@@ -50,10 +50,10 @@ class dictionaryyy(commands.Cog):
 					else:
 						await ctx.send(f"That word might be wrong. Did you instead mean any of these:\n**{', '.join(SpellChecker().candidates(word))}**{tip}")
 			except Exception as e:
-				await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+				await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
 
 		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
 
 def setup(cloff):
 	cloff.add_cog(dictionaryyy(cloff))

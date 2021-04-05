@@ -1,6 +1,9 @@
 import discord, json, datetime, random, os
 from discord.ext import tasks, commands
 
+from discord.utils import get #to get roles
+
+
 class water_ping(commands.Cog):
 
 	def __init__(self, cloff):
@@ -20,14 +23,16 @@ class water_ping(commands.Cog):
 			with open(cloff_dict['path_to_file'] + f'/database/water.json', 'r+') as f:
 				data = json.load(f)
 				servers = data['servers_channels']
+
 				last_poing = datetime.datetime.strptime(data["last_poing"], '%Y-%m-%d %H:%M:%S.%f')
 
 				if (datetime.datetime.now()-last_poing).seconds >= 3600:
-
-					file = discord.File(cloff_dict['path_to_file'] + f'/images/water_pics/{random.choice(os.listdir(cloff_dict["path_to_file"]+"/images/water_pics/"))}')
 					
+					random_pic = random.choice(os.listdir(cloff_dict["path_to_file"]+"/images/water_pics/"))
+
 					for server in servers:
 
+						file = discord.File(cloff_dict['path_to_file'] + f'/images/water_pics/{random_pic}')
 						server_instance = self.client.get_guild(server[0])
 						
 						if bool(server_instance):
@@ -65,19 +70,24 @@ class water_ping(commands.Cog):
 		except Exception as e:
 			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
 
-	@commands.command(aliases=['wp', 'wet', 'wet_me'])
+	@commands.command(aliases=['wp', 'wet', 'wet_me', 'water'])
 	async def water_ping(self, ctx):
 		try:
 			with open(cloff_dict['path_to_file'] + f'/database/water.json', 'r+') as f:
 				data = json.load(f)
-				if ctx.guild.id in [servers[0] for servers in data["servers_channels"]]:
-					guild_roles = await ctx.guild.fetch_roles()
-					if ("water buddies" in [role.name for role in guild_roles]) or (data["servers_channels"][ctx.guild.id]):
-						0
+				for server in data["servers_channels"]:
+					if server[0] == ctx.guild.id:
+						if server[2] in [role.id for role in ctx.author.roles]:
+							await ctx.author.remove_roles(get(ctx.guild.roles, id=server[2]))
+							await ctx.reply('You will no longer be notified of water pings on this server :(')
+						else: 
+							await ctx.author.add_roles(get(ctx.guild.roles, id=server[2]))
+							await ctx.reply('You will now be notified of water pings! :D')
+					0
 			#if not ()
 			#await ctx.send(bool("water buddies" in [role.name for role in ctx.author.roles]))
 		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
 		#check if server has agreed for waterping. if not, and the person who ran isnt admin, return "ask admin to enable"
 		#if admin, add server to list and check if it has a waterping channel.
 		#if not, add a channel and start sending waterpings to it. also create roll w blue colour.

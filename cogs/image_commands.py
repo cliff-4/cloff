@@ -96,11 +96,11 @@ class images_uwu(commands.Cog):
 				await ctx.send(embed = embed)
 				await message_instance.delete(delay=1)
 		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
 
 	@commands.command(aliases = ['Flag', 'f'])
 	async def flag(self, ctx, *args):
-		if 1:#try:
+		try:
 			argument = "_".join([arg.capitalize() for arg in args])
 			if argument+".png" in os.listdir(cloff_dict['path_to_file'] + "/images/flags/"):
 				file = discord.File(cloff_dict['path_to_file'] + "/images/flags/" + argument+".png")
@@ -120,8 +120,8 @@ class images_uwu(commands.Cog):
 
 			await ctx.send(embed=embed)
 		
-		#except Exception as e:
-		#	await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+		except Exception as e:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
 
 def setup(cloff):
 	cloff.add_cog(images_uwu(cloff))

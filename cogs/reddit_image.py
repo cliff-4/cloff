@@ -42,7 +42,7 @@ class reddit_images(commands.Cog):
 					kk = f'_(Requested by <@!{ctx.message.author.id}>)_\n'
 				await ctx.send(f'{kk}**{submission.title}**\nby u/{submission.author.name} (from r/{submission.subreddit.display_name})\n{submission.url}')
 		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
 
 def setup(cloff):
 	cloff.add_cog(reddit_images(cloff))
