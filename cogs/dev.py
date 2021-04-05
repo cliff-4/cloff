@@ -34,12 +34,6 @@ class commands_under_development(commands.Cog):
 				#list = []
 				#await ctx.guild.fetch_roles()
 				#await ctx.send(ctx.author.avatar_url)
-				file = discord.File(f"{cloff_dict['path_to_file']}/images/.image_cache/hex_images/000000.png")
-				
-				e = discord.Embed()
-				
-				e.set_image(url=f"attachment://{cloff_dict['path_to_file']}/images/.image_cache/hex_images/000000.png")
-				k='40dde6'
 				await ctx.send('k')
 				#emoji = self.client.get_emoji(emoji_id)
 				#await ctx.message.add_reaction(emoji)
@@ -50,6 +44,13 @@ class commands_under_development(commands.Cog):
 				### server_id = ctx.message.channel.guild.id
 		except Exception as e:
 			await ctx.send(e) #dont wanna send this error to the error channel ykno
+
+	@commands.command(aliases = ['cog'])
+	async def cogs(self, ctx):
+		if ctx.message.author.id in cloff_dict['devs']:
+			list = [f"**{kek[:-3]}**" for kek in os.listdir(cloff_dict['path_to_file']+'/cogs/') if kek[-3:]=='.py']
+			str = "\n".join(list)
+			await ctx.send(f"Cogs : **{len(list)}**\n{str}")
 
 	@commands.command()
 	async def quote(self, ctx):
