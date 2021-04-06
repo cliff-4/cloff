@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
 import os
-import random
 import datetime
-import time
+import psutil #to get memory usage
 
 class commands_under_development(commands.Cog):
 
@@ -52,6 +51,18 @@ class commands_under_development(commands.Cog):
 			list = [f"**{kek[:-3]}**" for kek in os.listdir(cloff_dict['path_to_file']+'/cogs/') if kek[-3:]=='.py']
 			str = "\n".join(list)
 			await ctx.send(f"Cogs : **{len(list)}**\n{str}")
+
+	@commands.command(aliases=['mem'])
+	async def memory_usage(self, ctx):
+		try:
+			usage = (psutil.Process(os.getpid())).memory_info().rss
+			i = 0
+			while usage > 1024:
+				usage /= 1024
+				i += 1
+			await ctx.send(str("{:.2f}".format(usage)) + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][i])
+		except Exception as e: 
+			await ctx.send(e)
 
 	@commands.command()
 	async def quote(self, ctx):

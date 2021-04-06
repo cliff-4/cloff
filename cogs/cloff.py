@@ -3,8 +3,7 @@ from discord.ext import commands
 import os
 import random
 import datetime
-import time
-import numpy as np, cv2 as cv #for hex colour thingy
+import asyncio
 
 class cloff_the_bot(commands.Cog):
 
@@ -141,7 +140,7 @@ class cloff_the_bot(commands.Cog):
 				else:
 					for i in range(times):
 						await ctx.send(" ".join(argument))
-						time.sleep(0.5)
+						await asyncio.sleep(0.5)
 			except Exception as e:
 				print(e)
 
