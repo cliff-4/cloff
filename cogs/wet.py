@@ -31,6 +31,9 @@ class water_ping(commands.Cog):
 					messages_instance = open(cloff_dict['path_to_file'] + "/database/water_messages.txt", "r")
 					messages = messages_instance.read().split("\n")
 					messages_instance.close()
+					string = random.choice(messages)
+					while not string:
+						string = random.choice(messages)
 
 					for server in servers:
 
@@ -48,10 +51,6 @@ class water_ping(commands.Cog):
 							if not bool(role_instance):
 								role_instance = await server_instance.create_role(name="water buddies", colour=discord.Colour(0x40dde6))
 								server[2] = role_instance.id
-
-							string = random.choice(messages)
-							while not string:
-								string = random.choice(messages)
 
 							message = f'{string}\n<@&{role_instance.id}>'
 							check_emoji = "\N{ballot box with check}"

@@ -29,6 +29,7 @@ def cog_update():
 	for cog in os.listdir(cloff_dict['path_to_file'] + "/cogs"):
 		if cog.endswith(".py"):
 			cog_list.append(cog[:-3])
+	cog_list.sort()
 
 cog_update()
 
