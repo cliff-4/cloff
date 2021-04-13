@@ -6,6 +6,7 @@ import os
 import datetime
 from configparser import ConfigParser
 import builtins
+import traceback
 
 #set path_to_file as a variable to be used across modules
 __builtins__.cloff_dict = {
@@ -64,8 +65,8 @@ async def load(ctx, extention=''):
 							cloff.load_extension(f'cogs.{ext}')
 						await ctx.send(f"{to_do} [{ext}]\t_executed in {str(datetime.datetime.now()-time1)[-8:-3]} s_")
 						print(f"~{to_do} [{ext}]")
-					except Exception as e:
-						await ctx.send(e)
+					except Exception:
+						await ctx.send(traceback.format_exc())
 		else:
 			time1 = datetime.datetime.now()
 			try:
@@ -83,8 +84,8 @@ async def load(ctx, extention=''):
 						cloff.load_extension(f'cogs.{extention}')
 					await ctx.send(f"{to_do} [{extention}]\t_executed in {str(datetime.datetime.now()-time1)[-8:-3]} s_")
 					print(f"~{to_do} [{extention}]")
-				except Exception as e:
-					await ctx.send(e)
+				except Exception:
+					await ctx.send(traceback.format_exc())
 	else:
 		await ctx.send("You do not have the permission to run this command :pig_nose:")
 

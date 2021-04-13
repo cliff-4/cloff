@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 import datetime
 import psutil #to get memory usage
+import traceback
 
 class commands_under_development(commands.Cog):
 
@@ -12,9 +13,9 @@ class commands_under_development(commands.Cog):
 	@commands.Cog.listener()
 	async def on_ready(self):
 		print('dev commands ready')
-		await self.client.get_channel(cloff_dict['error_channel_id']).send([f"<@!{id}>" for id in cloff_dict['devs']])
+		await self.client.get_channel(cloff_dict['error_channel_id']).send(f"<@!{self.client.user.id}> is online\n{[f'<@!{id}>' for id in cloff_dict['devs']]}")
 
-	@commands.command()
+	@commands.command(aliases=['fuckoff'])
 	async def kill(self, ctx):
 		if ctx.message.author.id in cloff_dict['devs']:
 			await ctx.send("_adios_")
@@ -34,7 +35,7 @@ class commands_under_development(commands.Cog):
 				#list = []
 				#await ctx.guild.fetch_roles()
 				#await ctx.send(ctx.author.avatar_url)
-				await ctx.send((await ctx.guild.create_role(name="water buddies", colour=discord.Colour(0x40DDE6))).id)
+				await ctx.send(f"<@!{self.client.user.id}>")
 				#emoji = self.client.get_emoji(emoji_id)
 				#await ctx.message.add_reaction(emoji)
 				#ids = []
@@ -42,8 +43,8 @@ class commands_under_development(commands.Cog):
 				#	ids.append(guild.id)
 				#await ctx.send(ids)
 				### server_id = ctx.message.channel.guild.id
-		except Exception as e:
-			await ctx.send(e) #dont wanna send this error to the error channel ykno
+		except Exception:
+			await ctx.send(traceback.format_exc()) #dont wanna send this error to the error channel ykno
 
 	@commands.command(aliases = ['cog'])
 	async def cogs(self, ctx):
@@ -61,12 +62,12 @@ class commands_under_development(commands.Cog):
 				usage /= 1024
 				i += 1
 			await ctx.send(str("{:.2f}".format(usage)) + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][i])
-		except Exception as e: 
-			await ctx.send(e)
+		except Exception: 
+			await ctx.send(traceback.format_exc())
 
 	@commands.command()
 	async def quote(self, ctx):
-		0
+		pass
 
 class youtube_uwu(commands.Cog):
 
@@ -78,12 +79,12 @@ class youtube_uwu(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
-		0
+		pass
 		#print('youtube ready')
 
 	@commands.command(aliases=['youtube'])
 	async def yt(self, ctx):
-		0
+		pass
 
 class le_memes(commands.Cog):
 

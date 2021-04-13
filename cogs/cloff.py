@@ -4,6 +4,7 @@ import os
 import random
 import datetime
 import asyncio
+import traceback
 
 class cloff_the_bot(commands.Cog):
 
@@ -126,13 +127,13 @@ class cloff_the_bot(commands.Cog):
 			if type(int(argument[-1])) is int:
 				times = int(argument[-1])
 				argument.pop()
-		except Exception as e:
-			print(e)
+		except Exception:
+			print(traceback.format_exc())
 		if times > 10:
 			try:
 				await ctx.send("Ew no not gonna spam that many")
-			except Exception as e:
-				print(e)
+			except Exception:
+				print(traceback.format_exc())
 		else:
 			try:
 				if not argument:
@@ -141,8 +142,8 @@ class cloff_the_bot(commands.Cog):
 					for i in range(times):
 						await ctx.send(" ".join(argument))
 						await asyncio.sleep(0.5)
-			except Exception as e:
-				print(e)
+			except Exception:
+				print(traceback.format_exc())
 
 def setup(cloff):
 	cloff.add_cog(cloff_the_bot(cloff))

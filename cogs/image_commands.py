@@ -1,6 +1,7 @@
 import discord, json, datetime, random, os
 from discord.ext import tasks, commands
 import numpy as np, cv2 as cv #for hex colour thingy
+import traceback
 
 class images_uwu(commands.Cog):
 
@@ -11,14 +12,14 @@ class images_uwu(commands.Cog):
 	async def on_ready(self):
 		print('image commands ready')
 
-	@tasks.loop(hours=5)
+	@tasks.loop(hours=1)
 	async def delete_cache(self, ctx):
 		try:
 			with open(cloff_dict['path_to_file'] + f'/database/last_done.json', 'r+') as f:
 				data = json.load(f)
 				last_clear = datetime.datetime.strptime(data['last_image_cache_clear'], '%Y-%m-%d %H:%M:%S.%f')
 				
-				if (datetime.datetime.now() - last_clear).days >= 1:
+				if (datetime.datetime.now() - last_clear).days > 0:
 					path = cloff_dict['path_to_file'] + "/images/.image_cache/hex_images/"
 					full_path_list = []
 					for file in os.listdir(path):
@@ -27,12 +28,12 @@ class images_uwu(commands.Cog):
 						os.remove(file)
 					data['last_image_cache_clear'] = str(datetime.datetime.now())
 
-				f.seek(0)
-				json.dump(data, f, indent="\t")
-				f.truncate()
+					f.seek(0)
+					json.dump(data, f, indent="\t")
+					f.truncate()
 
-		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+		except Exception:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(traceback.format_exc())
 
 	@commands.command(aliases = ['color', 'c', 'Color', 'Colour', 'C'])
 	async def colour(self, ctx, *arguments):
@@ -95,8 +96,8 @@ class images_uwu(commands.Cog):
 				embed.add_field(name = 'Colour', value=f"{men}\nHEX: 0x**{argument.upper()}**\nRGB: **{(R,G,B)}**\n{com}")
 				await ctx.send(embed = embed)
 				await message_instance.delete(delay=1)
-		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
+		except Exception:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{traceback.format_exc()} for [{ctx.message.content}]")
 
 	@commands.command(aliases = ['Flag', 'f'])
 	async def flag(self, ctx, *args):
@@ -113,15 +114,15 @@ class images_uwu(commands.Cog):
 
 			name = "name"
 
-			embed = discord.Embed(title="Country Flag", value='k', colour=discord.Colour(0x808080))
+			embed = discord.Embed(title="Country Flag", value='k', colour=discord.Colour(0x000478))
 			embed.set_image(url = url)
 			embed.add_field(name=country_name.capitalize(), value=f"""Name: {name}""")
 			
 
 			await ctx.send(embed=embed)
 		
-		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
+		except Exception:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{traceback.format_exc()} for [{ctx.message.content}]")
 
 def setup(cloff):
 	cloff.add_cog(images_uwu(cloff))

@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import json
 from spellchecker import SpellChecker
+import traceback
 
 class dictionaryyy(commands.Cog):
 
@@ -49,11 +50,11 @@ class dictionaryyy(commands.Cog):
 						await ctx.send(f"Sorry, but I don't know the meaning of **{word.lower()}** :({tip}")
 					else:
 						await ctx.send(f"That word might be wrong. Did you instead mean any of these:\n**{', '.join(SpellChecker().candidates(word))}**{tip}")
-			except Exception as e:
-				await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
+			except Exception:
+				await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{traceback.format_exc()} for [{ctx.message.content}]")
 
-		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
+		except Exception:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{traceback.format_exc()} for [{ctx.message.content}]")
 
 def setup(cloff):
 	cloff.add_cog(dictionaryyy(cloff))

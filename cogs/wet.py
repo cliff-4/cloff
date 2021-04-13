@@ -1,6 +1,6 @@
 import discord, json, datetime, random, os
 from discord.ext import tasks, commands
-
+import traceback #for detailed errors
 from discord.utils import get #to get roles
 
 class water_ping(commands.Cog):
@@ -24,8 +24,8 @@ class water_ping(commands.Cog):
 				servers = data['servers_channels']
 
 				last_poing = datetime.datetime.strptime(data["last_poing"], '%Y-%m-%d %H:%M:%S.%f')
-
-				if (datetime.datetime.now()-last_poing).seconds >= 3600:
+				delta_time = datetime.datetime.now()-last_poing
+				if delta_time.total_seconds() >= 7200:
 					
 					random_pic = random.choice(os.listdir(cloff_dict["path_to_file"]+"/images/water_pics/"))
 					messages_instance = open(cloff_dict['path_to_file'] + "/database/water_messages.txt", "r")
@@ -55,7 +55,7 @@ class water_ping(commands.Cog):
 							message = f'{string}\n<@&{role_instance.id}>'
 							check_emoji = "\N{ballot box with check}"
 
-							water_ping = await channel_instance.send(message, file = file)
+							water_ping = await channel_instance.send(message)#, file = file) #removed file from message. Because.. why not. Its repetitive and boring now.
 							await water_ping.add_reaction(check_emoji)
 
 					data['last_poing'] = str(datetime.datetime.now())
@@ -64,8 +64,8 @@ class water_ping(commands.Cog):
 				json.dump(data, f, indent="\t")
 				f.truncate()
 
-		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
+		except Exception:
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(traceback.format_exc())
 
 	@commands.command(aliases=['wp', 'wet', 'wet_me', 'water'])
 	async def water_ping(self, ctx):
@@ -80,11 +80,11 @@ class water_ping(commands.Cog):
 						else: 
 							await ctx.author.add_roles(get(ctx.guild.roles, id=server[2]))
 							await ctx.reply('You will now be notified of water pings! :D')
-					0
 			#if not ()
 			#await ctx.send(bool("water buddies" in [role.name for role in ctx.author.roles]))
 		except Exception as e:
-			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{e} for [{ctx.message.content}]")
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(f"{traceback.format_exc()} for [{ctx.message.content}]")
+			await self.client.get_channel(cloff_dict['error_channel_id']).send(e)
 		#check if server has agreed for waterping. if not, and the person who ran isnt admin, return "ask admin to enable"
 		#if admin, add server to list and check if it has a waterping channel.
 		#if not, add a channel and start sending waterpings to it. also create roll w blue colour.
