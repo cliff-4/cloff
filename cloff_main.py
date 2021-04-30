@@ -13,7 +13,8 @@ __builtins__.cloff_dict = {
 	'path_to_file' : str(os.path.dirname(os.path.abspath(__file__))),
 	'devs' : [700376271355379823],
 	'time_start' : datetime.datetime.now(),
-	'error_channel_id' : 827694723555786772
+	'error_channel_id' : 827694723555786772,
+	'unnecessary_boolean_value_for_my_personal_water_pings' : False
 } #prolly wanna keep this in json file with you (when hosting bot on other server)
 
 #to get discord token from conf.ini

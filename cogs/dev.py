@@ -15,6 +15,10 @@ class commands_under_development(commands.Cog):
 		print('dev commands ready')
 		await self.client.get_channel(cloff_dict['error_channel_id']).send(f"<@!{self.client.user.id}> is online\n{[f'<@!{id}>' for id in cloff_dict['devs']]}")
 
+	@commands.command(aliases=[])
+	async def dev(self, ctx):
+		await ctx.send("[dev, kill, uptime, test, cogs, memory_usage, quote]")
+
 	@commands.command(aliases=['fuckoff'])
 	async def kill(self, ctx):
 		if ctx.message.author.id in cloff_dict['devs']:
@@ -65,9 +69,6 @@ class commands_under_development(commands.Cog):
 		except Exception: 
 			await ctx.send(traceback.format_exc())
 
-	@commands.command()
-	async def quote(self, ctx):
-		pass
 
 class youtube_uwu(commands.Cog):
 
@@ -84,7 +85,7 @@ class youtube_uwu(commands.Cog):
 
 	@commands.command(aliases=['youtube'])
 	async def yt(self, ctx):
-		pass
+		pass		
 
 class le_memes(commands.Cog):
 

@@ -1,0 +1,8 @@
+memes
+quote
+currency convertor
+unit convertor
+time zone convertor
+libgen
+weather
+furry commands

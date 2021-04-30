@@ -7,17 +7,14 @@ class water_ping(commands.Cog):
 
 	def __init__(self, cloff):
 		self.client = cloff
-		self.water.start()
-
-	def cog_unload(self):
-		self.water.cancel()
 	
 	@commands.Cog.listener()
 	async def on_ready(self):
 		print('wet as fuck bro')
 
-	@tasks.loop(seconds=600)
-	async def water(self):
+	#@tasks.loop(seconds=600)
+	@commands.command()
+	async def water_ping_sender(self):
 		try:
 			with open(cloff_dict['path_to_file'] + f'/database/water.json', 'r+') as f:
 				data = json.load(f)
@@ -93,6 +90,24 @@ class water_ping(commands.Cog):
 		#ask for timezone in wp config. dont wanna ping them all night ykno.
 
 		#waterping channel in bot server: 826193848476500019
+
+	@commands.command()
+	async def changethebool(self, ctx):
+		if ctx.message.author.id in cloff_dict['devs']:
+			try:
+				str_lol = 'unnecessary_boolean_value_for_my_personal_water_pings'
+				boolean_value = cloff_dict[str_lol]
+				cloff_dict[str_lol] = not boolean_value
+				await ctx.send(f'current bool: {boolean_value}')
+			except:
+				await ctx.send(traceback.format_exc())
+
+	@tasks.loop(hours = 1)
+	async def secretcommandlol(self):
+		if cloff_dict['unnecessary_boolean_value_for_my_personal_water_pings']:
+			user_instance = await self.client.fetch_user(cloff_dict['devs'][0])
+			await user_instance.send("drink water.")
+
 
 def setup(cloff):
 	cloff.add_cog(water_ping(cloff))

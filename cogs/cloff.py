@@ -108,6 +108,12 @@ class cloff_the_bot(commands.Cog):
 		if arg in list:
 			await ctx.send("uwu themk :orange_heart:")
 
+	@commands.command(aliases=['bad'])
+	async def bad_boy(self, ctx, arg):
+		list = ["boy", "girl", "boi", "gorl", "bot", "cloff", "cloffo"]
+		if arg in list:
+			await ctx.send("Fuck you too.")
+
 	@commands.command(aliases=["roast"])
 	async def bully(self, ctx, argument=""):
 		if argument:	
@@ -144,6 +150,60 @@ class cloff_the_bot(commands.Cog):
 						await asyncio.sleep(0.5)
 			except Exception:
 				print(traceback.format_exc())
+
+	@commands.command()
+	async def wiggle(self, ctx, arg=1):
+		str = """big wiggle
+big wiggle
+  big wiggle
+   big wiggle
+     big wiggle
+       big wiggle
+         big wiggle
+            big wiggle
+               big wiggle
+                  big wiggle
+                     big wiggle
+                        big wiggle
+                           big wiggle
+                              big wiggle
+                                 big wiggle
+                                    big wiggle
+                                       big wiggle
+                                          big wiggle
+                                            big wiggle
+                                             big wiggle
+                                               big wiggle
+                                                big wiggle
+                                                big wiggle
+                                                big wiggle
+                                               big wiggle
+                                              big wiggle
+                                             big wiggle
+                                           big wiggle
+                                         big wiggle
+                                       big wiggle
+                                    big wiggle
+                                 big wiggle
+                              big wiggle
+                           big wiggle
+                        big wiggle
+                     big wiggle
+                  big wiggle
+               big wiggle
+            big wiggle
+         big wiggle
+       big wiggle
+     big wiggle
+   big wiggle
+  big wiggle
+ big wiggle
+big wiggle
+big wiggle
+big wiggle"""
+		for i in range(min(arg, 5)):
+			await ctx.send(str)
+
 
 def setup(cloff):
 	cloff.add_cog(cloff_the_bot(cloff))
